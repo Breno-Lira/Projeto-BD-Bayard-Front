@@ -27,7 +27,7 @@ export default function Inicio() {
 
             <h1 className='text-center mt-4'>Clientes</h1>
 
-            <Link className="btn btn-success" to="addcliente">Add cliente</Link>
+            <Link className="btn btn-success" to="addcliente">Adicionar</Link>
 
             <div className='py-4 px-3'>
                 <table className="table table-striped table-bordered border shadow">

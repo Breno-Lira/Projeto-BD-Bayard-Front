@@ -50,7 +50,7 @@ export default function EditUser() {
   }
 
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8080/clientes/editar/${cpfParam}`)
+    const result = await axios.get(`http://localhost:8080/clientes/${cpfParam}`)
     setUser(result.data)
   }
 
@@ -68,6 +68,7 @@ export default function EditUser() {
                 Cpf
               </label>
               <input
+                disabled
                 type={"text"}
                 className='form-control'
                 name='cpf'
