@@ -12,6 +12,7 @@ import EditFornecedor from './fornecedores/EditFornecedor';
 import Produto from './pages/Produto';
 import AddProduto from './produtos/AddProduto';
 import EditProduto from './produtos/EditProduto';
+import Vestuario from './pages/Vestuario';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/produtos" element={<Produto />} />
           <Route exact path="/addproduto" element={<AddProduto />} />
           <Route exact path="/editproduto/:codigo" element={<EditProduto />} />
+          <Route exact path="/vestuario" element={<Vestuario />} />
         </Routes>
         
 

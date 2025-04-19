@@ -19,7 +19,7 @@ export default function Navbar() {
             </button>
             <ul className="dropdown-menu">
               <Link to="/produtos" className="dropdown-item">Diversos</Link>
-              <li><a className="dropdown-item" href="#">Roupas</a></li>
+              <Link to="/vestuario" className=" dropdown-item">Roupas</Link>
               <li><a className="dropdown-item" href="#">Calçados</a></li>
             </ul>
           </div>
