@@ -9,6 +9,9 @@ import HomePage from './pages/HomePage';
 import Fornecedores from './pages/Fornecedores';
 import AddFornecedor from './fornecedores/AddFornecedor';
 import EditFornecedor from './fornecedores/EditFornecedor';
+import Produto from './pages/Produto';
+import AddProduto from './produtos/AddProduto';
+import EditProduto from './produtos/EditProduto';
 
 
 function App() {
@@ -25,7 +28,11 @@ function App() {
           <Route exact path="/fornecedores" element={<Fornecedores />} />
           <Route exact path="/addfornecedor" element={<AddFornecedor />} />
           <Route exact path="/editfornecedor/:cnpj" element={<EditFornecedor />} />
-      </Routes>
+          <Route exact path="/produtos" element={<Produto />} />
+          <Route exact path="/addproduto" element={<AddProduto />} />
+          <Route exact path="/editproduto/:codigo" element={<EditProduto />} />
+        </Routes>
+        
 
     </Router>
     
