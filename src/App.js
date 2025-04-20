@@ -13,6 +13,11 @@ import Produto from './pages/Produto';
 import AddProduto from './produtos/AddProduto';
 import EditProduto from './produtos/EditProduto';
 import Vestuario from './pages/Vestuario';
+import AddVestuario from './produtos/AddVestuario';
+import EditVestuario from './produtos/EditVestuario';
+import Calcado from './pages/Calcado';
+import AddCalcado from './produtos/AddCalcado';
+import EditCalcado from './produtos/EditCalcado';
 
 
 function App() {
@@ -33,6 +38,11 @@ function App() {
           <Route exact path="/addproduto" element={<AddProduto />} />
           <Route exact path="/editproduto/:codigo" element={<EditProduto />} />
           <Route exact path="/vestuario" element={<Vestuario />} />
+          <Route exact path="/addvestuario" element={<AddVestuario />} />
+          <Route exact path="/editvestuario/:codigo" element={<EditVestuario />} />
+          <Route exact path="/calcado" element={<Calcado />} />
+          <Route exact path="/addcalcado" element={<AddCalcado />} />
+          <Route exact path="/editcalcado/:codigo" element={<EditCalcado />} />
         </Routes>
         
 
