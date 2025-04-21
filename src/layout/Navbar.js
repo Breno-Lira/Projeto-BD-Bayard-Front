@@ -23,6 +23,17 @@ export default function Navbar() {
               <Link to="/calcado" className=" dropdown-item">Calçados</Link>
             </ul>
           </div>
+
+          <div class="dropdown">
+            <button className="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Funcionarios
+            </button>
+            <ul className="dropdown-menu">
+              <Link to="/vendedor" className="dropdown-item">Vendedor</Link>
+              <Link to="/vendedor" className=" dropdown-item">Caixa</Link>
+              <Link to="/vendedor" className=" dropdown-item">Estoquista</Link>
+            </ul>
+          </div>
           
         </div>
       </nav>

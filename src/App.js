@@ -19,6 +19,9 @@ import Calcado from './pages/Calcado';
 import AddCalcado from './produtos/AddCalcado';
 import EditCalcado from './produtos/EditCalcado';
 
+import Vendedor from './pages/Vendedor';
+import AddVendedor from './produtos/AddVendedor';
+import EditVEndedor from './produtos/EditVendedor';
 
 function App() {
   return (
@@ -43,6 +46,10 @@ function App() {
           <Route exact path="/calcado" element={<Calcado />} />
           <Route exact path="/addcalcado" element={<AddCalcado />} />
           <Route exact path="/editcalcado/:codigo" element={<EditCalcado />} />
+
+          <Route exact path="/vendedor" element={<Vendedor />} />
+          <Route exact path="/addVendedor" element={<AddVendedor />} />
+          <Route exact path="/editVendedor/:cpf" element={<EditVEndedor />} />
         </Routes>
         
 
