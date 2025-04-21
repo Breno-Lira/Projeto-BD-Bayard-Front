@@ -18,10 +18,11 @@ import EditVestuario from './produtos/EditVestuario';
 import Calcado from './pages/Calcado';
 import AddCalcado from './produtos/AddCalcado';
 import EditCalcado from './produtos/EditCalcado';
-
 import Vendedor from './pages/Vendedor';
 import AddVendedor from './produtos/AddVendedor';
 import EditVEndedor from './produtos/EditVendedor';
+import Venda from './pages/Venda';
+import AddVenda from './vendas/AddVenda';
 
 function App() {
   return (
@@ -50,6 +51,9 @@ function App() {
           <Route exact path="/vendedor" element={<Vendedor />} />
           <Route exact path="/addVendedor" element={<AddVendedor />} />
           <Route exact path="/editVendedor/:cpf" element={<EditVEndedor />} />
+
+          <Route exact path="/venda" element={<Venda />} />
+          <Route exact path="/addvenda" element={<AddVenda />} />
         </Routes>
         
 
