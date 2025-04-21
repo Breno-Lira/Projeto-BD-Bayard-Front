@@ -32,7 +32,7 @@ export default function Navbar() {
             <ul className="dropdown-menu">
               <Link to="/vendedor" className="dropdown-item">Vendedor</Link>
               <Link to="/caixa" className=" dropdown-item">Caixa</Link>
-              <Link to="/vendedor" className=" dropdown-item">Estoquista</Link>
+              <Link to="/estoquista" className=" dropdown-item">Estoquista</Link>
             </ul>
           </div>
           
