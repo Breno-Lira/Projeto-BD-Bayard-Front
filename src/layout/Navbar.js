@@ -7,10 +7,10 @@ export default function Navbar() {
 
       <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/1">BAYARD</a>
+          <a className="navbar-brand" href="/">BAYARD</a>
 
 
-          <Link className="btn btn-outline-light" to="/">Clientes</Link>
+          <Link className="btn btn-outline-light" to="/cliente">Clientes</Link>
           <Link className="btn btn-outline-light" to="/fornecedores">Fornecedores</Link>
           <Link className="btn btn-outline-light" to="/venda">Venda</Link>
 

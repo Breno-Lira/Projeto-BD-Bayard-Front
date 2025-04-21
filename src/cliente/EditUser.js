@@ -46,7 +46,7 @@ export default function EditUser() {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.put(`http://localhost:8080/clientes/editar/${cpfParam}`, user)
-    navigate("/")
+    navigate("/cliente")
   }
 
   const loadUser = async () => {
@@ -129,7 +129,7 @@ export default function EditUser() {
               <input type={"text"} className='form-control' name='complemento' placeholder='Digite um nome' value={complemento.toString()} onChange={(e) => onInputChange(e)}></input>
             </div>
 
-            <Link type='submit' className='btn btn-outline-danger mx-4' to="/">Cancelar</Link>
+            <Link type='submit' className='btn btn-outline-danger mx-4' to="/cliente">Cancelar</Link>
             <button type='submit' className='btn btn-outline-success'>Adicionar</button>
           </form>
         </div>

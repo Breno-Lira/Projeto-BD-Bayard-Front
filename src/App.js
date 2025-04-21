@@ -23,11 +23,9 @@ import AddVendedor from './produtos/AddVendedor';
 import EditVEndedor from './produtos/EditVendedor';
 import Venda from './pages/Venda';
 import AddVenda from './vendas/AddVenda';
-
 import Caixa from './pages/Caixa';
 import AddCaixa from './produtos/AddCaixa';
 import EditCaixa from './produtos/EditCaixa';
-
 import Estoquista from './pages/Estoquista';
 import AddEstoquista from './produtos/AddEstoquista';
 import EditEstoquista from './produtos/EditEstoquista';
@@ -39,9 +37,10 @@ function App() {
     <Router>
       <Navbar/>
       
-      <Routes>
-          <Route exact path="/" element={<Inicio />} />
-          <Route exact path="/1" element={<HomePage />} />
+        <Routes>
+          <Route exact path="/" element={<HomePage />} />
+          <Route exact path="/cliente" element={<Inicio />} />
+          
           <Route exact path="/addcliente" element={<AddUser />} />
           <Route exact path="/editcliente/:cpf" element={<EditUser />} />
           <Route exact path="/fornecedores" element={<Fornecedores />} />

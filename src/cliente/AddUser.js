@@ -40,7 +40,7 @@ export default function Adduser() {
     const onSubmit =async (e) => {
         e.preventDefault();
         await axios.post("http://localhost:8080/clientes/add", user)
-        navigate("/")
+        navigate("/cliente")
     }
 
     return (
@@ -116,7 +116,7 @@ export default function Adduser() {
                             <input type={"text"} className='form-control' name='complemento' placeholder='Digite um nome' value={complemento.toString()} onChange={(e) => onInputChange(e)}></input>
                         </div>
 
-                        <Link type='submit' className='btn btn-outline-danger mx-4' to="/">Cancelar</Link>
+                        <Link type='submit' className='btn btn-outline-danger mx-4' to="/cliente">Cancelar</Link>
                         <button type='submit' className='btn btn-outline-success'>Adicionar</button>
                     </form>
                 </div>
