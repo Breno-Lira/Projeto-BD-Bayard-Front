@@ -5,9 +5,9 @@ export default function Navbar() {
   return (
     <div>
 
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">BAYARD</a>
+          <a className="navbar-brand" href="/1">BAYARD</a>
 
 
           <Link className="btn btn-outline-light" to="/">Clientes</Link>

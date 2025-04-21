@@ -6,7 +6,7 @@ export default function HomePage() {
       <div className='container'>
           
           
-          <img src={bayard} alt='perfil' style={{ width: '400px'}}     />
+          <img src={bayard} alt='perfil' style={{ width: '550px'}}     />
 
 
 

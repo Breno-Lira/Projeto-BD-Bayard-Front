@@ -24,7 +24,7 @@ export default function Venda() {
     return (
         <div className='container mt-4'>
             <h2 className='text-center mb-4'>Lista de Vendas</h2>
-            <Link className='btn btn-primary mb-3' to="/addvenda">Nova Venda</Link>
+            <Link className='btn btn-success' to="/addvenda">Adicionar</Link>
             <table className='table table-bordered'>
                 <thead>
                     <tr>
