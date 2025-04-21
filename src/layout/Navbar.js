@@ -12,6 +12,7 @@ export default function Navbar() {
 
           <Link className="btn btn-outline-light" to="/">Clientes</Link>
           <Link className="btn btn-outline-light" to="/fornecedores">Fornecedores</Link>
+          <Link className="btn btn-outline-light" to="/venda">Venda</Link>
 
           <div class="dropdown">
             <button className="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -30,7 +31,7 @@ export default function Navbar() {
             </button>
             <ul className="dropdown-menu">
               <Link to="/vendedor" className="dropdown-item">Vendedor</Link>
-              <Link to="/vendedor" className=" dropdown-item">Caixa</Link>
+              <Link to="/caixa" className=" dropdown-item">Caixa</Link>
               <Link to="/vendedor" className=" dropdown-item">Estoquista</Link>
             </ul>
           </div>

@@ -24,6 +24,10 @@ import EditVEndedor from './produtos/EditVendedor';
 import Venda from './pages/Venda';
 import AddVenda from './vendas/AddVenda';
 
+import Caixa from './pages/Caixa';
+import AddCaixa from './produtos/AddCaixa';
+import EditCaixa from './produtos/EditCaixa'
+
 function App() {
   return (
     <div className="App">
@@ -54,6 +58,10 @@ function App() {
 
           <Route exact path="/venda" element={<Venda />} />
           <Route exact path="/addvenda" element={<AddVenda />} />
+
+          <Route exact path="/caixa" element={<Caixa />} />
+          <Route exact path="/addCaixa" element={<AddCaixa />} />
+          <Route exact path="/editCaixa/:cpf" element={<EditCaixa />} />
         </Routes>
         
 
