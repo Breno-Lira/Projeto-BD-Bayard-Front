@@ -6,7 +6,6 @@ A aplicação se conecta a uma API em Spring Boot para realizar o gerenciamento 
 
 Link para o back-end: https://github.com/Breno-Lira/Projeto-BD-Bayard
 
----
 
 ## 🚀 Como iniciar o projeto
 
