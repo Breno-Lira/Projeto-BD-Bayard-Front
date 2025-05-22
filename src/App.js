@@ -108,9 +108,6 @@ function App() {
 
           <Route exact path="/devolucaoCliente" element={<DevolucaoCliente />} />
           <Route exact path="/adddevolucaoCliente" element={<AddDevolucaoCliente />} />
-
-
-
         </Routes>
 
     </Router>
