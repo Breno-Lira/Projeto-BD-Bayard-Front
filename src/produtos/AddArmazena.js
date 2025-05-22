@@ -1,23 +1,48 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function AddArmazena() {
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [armazena, setArmazena] = useState({
         estoquista_cpf: "",
         codigo_produto: "",
-        qtdArmazena: "", 
+        qtdArmazenada: "",
         armazena_id: ""
-    })
+    });
 
-    const { estoquista_cpf, codigo_produto, qtdArmazena, armazena_id } = armazena
+    const { estoquista_cpf, codigo_produto, qtdArmazenada, armazena_id } = armazena;
+
+    const [estoquistas, setEstoquistas] = useState([]);
+    const [produtos, setProdutos] = useState([]);
+
+    useEffect(() => {
+        carregarEstoquistas();
+        carregarProdutos();
+    }, []);
+
+    const carregarEstoquistas = async () => {
+        try {
+            const result = await axios.get("http://localhost:8080/estoquista");
+            setEstoquistas(result.data);
+        } catch (error) {
+            console.error("Erro ao carregar estoquistas:", error);
+        }
+    };
+
+    const carregarProdutos = async () => {
+        try {
+            const result = await axios.get("http://localhost:8080/produtos");
+            setProdutos(result.data);
+        } catch (error) {
+            console.error("Erro ao carregar produtos:", error);
+        }
+    };
 
     const onInputChange = (e) => {
-        setArmazena({ ...armazena, [e.target.name]: e.target.value })
-    }
+        setArmazena({ ...armazena, [e.target.name]: e.target.value });
+    };
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -33,45 +58,54 @@ export default function AddArmazena() {
 
                     <form onSubmit={onSubmit}>
                         <div className='mb-3'>
-                            <label htmlFor='estoquista_cpf' className='form-label'>Cpf do Estoquista</label>
-                            <input
-                                type="text"
-                                className='form-control'
+                            <label htmlFor='estoquista_cpf' className='form-label'>Estoquista (CPF)</label>
+                            <select
+                                className='form-select'
                                 name='estoquista_cpf'
-                                placeholder='Digite o Cpf do estoquista'
                                 value={estoquista_cpf}
                                 onChange={onInputChange}
                                 required
-                            />
+                            >
+                                <option value="">Selecione o estoquista</option>
+                                {estoquistas.map((e) => (
+                                    <option key={e.funcionario.cpf} value={e.funcionario.cpf}>
+                                        {e.funcionario.nome} - CPF: {e.funcionario.cpf}
+                                    </option>
+                                ))}
+                            </select>
 
-                            <label htmlFor='codigo_produto' className='form-label mt-2'>Código do Produto</label>
-                            <input
-                                type="text"
-                                className='form-control'
+                            <label htmlFor='codigo_produto' className='form-label mt-3'>Produto</label>
+                            <select
+                                className='form-select'
                                 name='codigo_produto'
-                                placeholder='Digite o código do produto'
                                 value={codigo_produto}
                                 onChange={onInputChange}
                                 required
-                            />
+                            >
+                                <option value="">Selecione o produto</option>
+                                {produtos.map((p) => (
+                                    <option key={p.codigo} value={p.codigo}>
+                                        {p.nome} - Código: {p.codigo}
+                                    </option>
+                                ))}
+                            </select>
 
-                            <label htmlFor='qtdArmazena' className='form-label mt-2'>Quantidade de Produtos Armazenados</label>
+                            <label htmlFor='qtdArmazenada' className='form-label mt-3'>Quantidade de Produtos Armazenados</label>
                             <input
-                                type="text"
+                                type="number"
                                 className='form-control'
-                                name='qtdArmazena'
-                                placeholder='Digite a quantidade de produtos armazenados'
-                                value={qtdArmazena}
+                                name='qtdArmazenada'
+                                value={qtdArmazenada}
                                 onChange={onInputChange}
                                 required
+                                min={0}
                             />
 
-                            <label htmlFor='armazena_id' className='form-label mt-2'>ID do Armazenamento</label>
+                            <label htmlFor='armazena_id' className='form-label mt-3'>ID do Armazenamento</label>
                             <input
                                 type="text"
                                 className='form-control'
                                 name='armazena_id'
-                                placeholder='Digite um ID para o Armazenamento'
                                 value={armazena_id}
                                 onChange={onInputChange}
                                 required
@@ -84,5 +118,5 @@ export default function AddArmazena() {
                 </div>
             </div>
         </div>
-    )
+    );
 }

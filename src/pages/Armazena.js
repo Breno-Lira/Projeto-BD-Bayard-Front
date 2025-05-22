@@ -45,7 +45,7 @@ export default function Armazena() {
                                 <tr key={index}>
                                     <td>{armazena.estoquista_cpf}</td>
                                     <td>{armazena.codigo_produto}</td>
-                                    <td>{armazena.qtdarmazena}</td>
+                                    <td>{armazena.qtdArmazenada}</td>
                                     <td>{armazena.armazena_id}</td>
                                     <td>
                                         
