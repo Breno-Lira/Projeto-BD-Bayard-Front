@@ -21,11 +21,45 @@ export default function EstoqueProduto() {
         loadEstoqueProduto()
     }
 
+
+    const [search, setSearch] = useState("");
+
+    const handleSearchChange = async (e) => {
+        const termo = e.target.value;
+        setSearch(termo);
+
+        if (termo.trim() === "") {
+            loadEstoqueProduto(); // volta lista completa
+        } else {
+            try {
+                const res = await axios.get(`http://localhost:8080/estoque_produto/buscar?termo=${termo}`);
+                if (res.status === 204) {
+                    setEstoqueProduto([]); // limpa lista se não encontrou ninguém
+                } else {
+                    setEstoqueProduto(res.data);
+                }
+            } catch (error) {
+                console.error("Erro na busca:", error);
+            }
+        }
+    };
+
     return (
         <div className='container mt-4'>
             <h2 className='text-center mb-4'>Estoque Produtos</h2>
             <div className="mb-4 text-center">
                 <Link className='btn btn-success btn-lg' to="/addestoqueProduto">Adicionar</Link>
+
+                <div className="px-3">
+                    <input
+                        type="text"
+                        className="form-control w-25"
+                        placeholder="Buscar por nome ou CPF"
+                        value={search}
+                        onChange={handleSearchChange}
+                    />
+                </div>
+
             </div>
 
             <div className="table-responsive">

@@ -73,7 +73,8 @@ export default function EditVendedor() {
         const vendedorPayload = {
             funcionario: {
                 cpf: vendedor.funcionario.cpf,
-                telefone: vendedor.funcionario.telefone,
+                telefone1: vendedor.funcionario.telefone1,
+                telefone2: vendedor.funcionario.telefone2,
                 nome: vendedor.funcionario.nome,
                 vendedorResponsavel: vendedor.funcionario.vendedorResponsavel,
                 chefia: vendedor.funcionario.chefia,
