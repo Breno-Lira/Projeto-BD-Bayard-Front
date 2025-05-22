@@ -47,6 +47,8 @@ import DevolucaoCliente from './pages/DevolucaoCliente'
 import AddDevolucaoCliente from './cliente/AddDevolucaoCliente'
 import DevolucaoFornecedor from './pages/DevolucaoFornecedor'
 import AddDevolucaoFornecedor from './fornecedores/AddDevolucaoFornecedor';
+import DashboardVendas from './dashboard/DashboardVendas';
+import DashboardEstoque from './dashboard/DashboardEstoque';
 
 function App() {
   return (
@@ -113,6 +115,9 @@ function App() {
 
           <Route exact path="/devolucaoFornecedor" element={<DevolucaoFornecedor />} />
           <Route exact path="/addDevolucaoFornecedor" element={<AddDevolucaoFornecedor />} />
+
+          <Route exact path="/dashboardvendas" element={<DashboardVendas />} />
+          <Route exact path="/dashboardestoque" element={<DashboardEstoque />} />
         </Routes>
 
     </Router>
