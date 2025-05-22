@@ -29,7 +29,12 @@ import EditCaixa from './produtos/EditCaixa';
 import Estoquista from './pages/Estoquista';
 import AddEstoquista from './produtos/AddEstoquista';
 import EditEstoquista from './produtos/EditEstoquista';
-
+import Pagamentos from './pages/Pagamento';
+import AddPagamentos from './pagamentos/AddPagamentos';
+import EditPagamentos from './pagamentos/EditPagamentos';
+import EstoqueProduto from './pages/EstoqueProduto';
+import AddEstoqueProduto from './estoque_produto/AddEstoqueProduto';
+import EditEstoqueProduto from './estoque_produto/EditEstoqueProduto';
 
 function App() {
   return (
@@ -70,6 +75,14 @@ function App() {
           <Route exact path="/estoquista" element={<Estoquista />} />
           <Route exact path="/addEstoquista" element={<AddEstoquista />} />
           <Route exact path="/editEstoquista/:cpf" element={<EditEstoquista />} />
+
+          <Route exact path="/pagamentos" element={<Pagamentos />} />
+          <Route exact path="/addPagamentos" element={<AddPagamentos />} />
+          <Route exact path="/editPagamentos/:idPagamento" element={<EditPagamentos />} />
+
+          <Route exact path="/estoqueProduto" element={<EstoqueProduto />} />
+          <Route exact path="/addestoqueProduto" element={<AddEstoqueProduto />} />
+          <Route exact path="/editestoqueProduto/:id_estoque" element={<EditEstoqueProduto />} />
         </Routes>
         
 
