@@ -18,8 +18,16 @@ export default function Caixa(){
     }
 
     const deleteUser = async (cpf) => {
-        await axios.delete(`http://localhost:8080/caixa/delete/${cpf}`)
-        loadUsers()
+        try {
+            await axios.delete(`http://localhost:8080/caixa/delete/${cpf}`);
+            loadUsers();
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                alert(error.response.data);
+            } else {
+                alert("Erro ao excluir Caixa.");
+            }
+        }
     }
 
     const [search, setSearch] = useState("");

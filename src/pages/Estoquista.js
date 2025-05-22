@@ -16,9 +16,18 @@ export default function Estoquista() {
         setUsers(result.data)
     }
 
+
     const deleteUser = async (cpf) => {
-        await axios.delete(`http://localhost:8080/estoquista/delete/${cpf}`)
-        loadUsers()
+        try {
+            await axios.delete(`http://localhost:8080/estoquista/delete/${cpf}`);
+            loadUsers();
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                alert(error.response.data);
+            } else {
+                alert("Erro ao excluir Caixa.");
+            }
+        }
     }
 
     const [search, setSearch] = useState("");

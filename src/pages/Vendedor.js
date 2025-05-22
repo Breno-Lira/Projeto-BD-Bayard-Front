@@ -17,8 +17,16 @@ export default function Vendedor(){
     }
 
     const deleteUser = async (cpf) => {
-        await axios.delete(`http://localhost:8080/vendedor/delete/${cpf}`)
-        loadUsers()
+        try {
+            await axios.delete(`http://localhost:8080/vendedor/delete/${cpf}`);
+            loadUsers();
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                alert(error.response.data);
+            } else {
+                alert("Erro ao excluir vendedor.");
+            }
+        }
     }
 
     const [search, setSearch] = useState("");
