@@ -2,60 +2,88 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-export default function AddDevolucaoCliente() {
+export default function AddDevolucaoFornecedor() {
 
     const navigate = useNavigate()
 
-    const [devCliente, setDevCliente] = useState({
-        fkProdutoCodigo: "",
-        fkClienteCPF: "",
-        fkVendedorCPF: "",
-        dataDevolucao: "",
+    const [devFornecedor, setDevFornecedor] = useState({
+        estoquistaCpf: "",
+        fornecedorCnpj: "",
+        codigoProduto: "",
+        devData: "",
         qtdProduto: ""
     })
 
     const onInputChange = (e) => {
         const { name, value } = e.target
-        setDevCliente({ ...devCliente, [name]: value })
+        setDevFornecedor({ ...devFornecedor, [name]: value })
     }
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        await axios.post("http://localhost:8080/devolucaoClientes/add", devCliente)
-        navigate("/devolucaoCliente")
+        await axios.post("http://localhost:8080/devolucaoFornecedores/add", devFornecedor)
+        navigate("/devolucaoFornecedor")
     }
 
-    const [clientes, setClientes] = useState([]);
+    const [estoquista, setEstoquista] = useState([]);
+    const [fornecedores, setFornecedores] = useState([]);
     const [produtos, setProdutos] = useState([]);
-    const [vendedores, setVendedores] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:8080/clientes")
-            .then(res => setClientes(res.data))
+        axios.get("http://localhost:8080/estoquista")
+            .then(res => setEstoquista(res.data))
+
+        axios.get("http://localhost:8080/fornecedores")
+            .then(res => setFornecedores(res.data))
 
         axios.get("http://localhost:8080/produtos2")
             .then(res => setProdutos(res.data))
-
-        axios.get("http://localhost:8080/vendedor")
-            .then(res => setVendedores(res.data))
     }, [])
 
     return (
         <div className='container'>
             <div className='row'>
                 <div className='col-md-6 offset-md-3 border rounded p-4 mt-4 shadow'>
-                    <h2 className="text-center m-4">Cadastrar Devolução Cliente</h2>
-
-                    <Link className="btn btn-success mb-2" to="/addvendasitens">Adicionar</Link>
+                    <h2 className="text-center m-4">Cadastrar Devolução Fornecedor</h2>
 
                     <form onSubmit={onSubmit}>
 
                         <div className='mb-3'>
+                            <label className='form-label mt-3'>CPF do Estoquista</label>
+                            <select
+                                className='form-select'
+                                name='estoquistaCpf'
+                                value={devFornecedor.estoquistaCpf}
+                                onChange={onInputChange}
+                                required
+                            >
+                                <option value="" disabled hidden>Selecione</option>
+                                {estoquista.map(e => (
+                                    <option key={e.funcionario.cpf} value={e.funcionario.cpf}>Estoquista: {e.funcionario.nome} / {e.funcionario.cpf}</option>
+                                ))}
+                            </select>
+
+                            <label className='form-label mt-3'>CNPJ do Fornecedor</label>
+                            <select
+                                className='form-select'
+                                name='fornecedorCnpj'
+                                value={devFornecedor.fornecedorCnpj}
+                                onChange={onInputChange}
+                                required
+                            >
+                                <option value="" disabled hidden>Selecione</option>
+                                {fornecedores.map(f => (
+                                    <option key={f.cnpj} value={f.cnpj}>
+                                        Fornecedor: {f.nome} / {f.cnpj}
+                                    </option>
+                                ))}
+                            </select>
+
                             <label className='form-label'>Código do Produto</label>
                             <select
                                 className='form-select'
-                                name='fkProdutoCodigo'
-                                value={devCliente.fkProdutoCodigo}
+                                name='codigoProduto'
+                                value={devFornecedor.codigoProduto}
                                 onChange={onInputChange}
                                 required
                             >
@@ -65,42 +93,12 @@ export default function AddDevolucaoCliente() {
                                 ))}
                             </select>
 
-                            <label className='form-label mt-3'>CPF do Cliente</label>
-                            <select
-                                className='form-select'
-                                name='fkClienteCPF'
-                                value={devCliente.fkClienteCPF}
-                                onChange={onInputChange}
-                                required
-                            >
-                                <option value="" disabled hidden>Selecione</option>
-                                {clientes.map(c => (
-                                    <option key={c.cpf} value={c.cpf}>{c.nome} - {c.cpf}</option>
-                                ))}
-                            </select>
-
-                            <label className='form-label mt-3'>CPF do Vendedor</label>
-                            <select
-                                className='form-select'
-                                name='fkVendedorCPF'
-                                value={devCliente.fkVendedorCPF}
-                                onChange={onInputChange}
-                                required
-                            >
-                                <option value="" disabled hidden>Selecione</option>
-                                {vendedores.map(v => (
-                                    <option key={v.funcionario.cpf} value={v.funcionario.cpf}>
-                                        {v.funcionario.nome} - {v.funcionario.cpf}
-                                    </option>
-                                ))}
-                            </select>
-
                             <label className='form-label mt-3'>Data da Devolução</label>
                             <input
                                 type="date"
                                 className='form-control'
-                                name='dataDevolucao'
-                                value={devCliente.dataDevolucao}
+                                name='devData'
+                                value={devFornecedor.devData}
                                 onChange={onInputChange}
                                 required
                             />
@@ -110,7 +108,7 @@ export default function AddDevolucaoCliente() {
                                 type="number"
                                 className='form-control'
                                 name='qtdProduto'
-                                value={devCliente.qtdProduto}
+                                value={devFornecedor.qtdProduto}
                                 onChange={onInputChange}
                                 required
                             />

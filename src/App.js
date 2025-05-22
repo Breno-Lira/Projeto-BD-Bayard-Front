@@ -45,6 +45,8 @@ import Repoe from './pages/Repoe';
 import AddRepoe from './repoe/AddRepoe'
 import DevolucaoCliente from './pages/DevolucaoCliente'
 import AddDevolucaoCliente from './cliente/AddDevolucaoCliente'
+import DevolucaoFornecedor from './pages/DevolucaoFornecedor'
+import AddDevolucaoFornecedor from './fornecedores/AddDevolucaoFornecedor';
 
 function App() {
   return (
@@ -108,10 +110,12 @@ function App() {
 
           <Route exact path="/devolucaoCliente" element={<DevolucaoCliente />} />
           <Route exact path="/adddevolucaoCliente" element={<AddDevolucaoCliente />} />
+
+          <Route exact path="/devolucaoFornecedor" element={<DevolucaoFornecedor />} />
+          <Route exact path="/addDevolucaoFornecedor" element={<AddDevolucaoFornecedor />} />
         </Routes>
 
     </Router>
-    
       
     </div>
   );

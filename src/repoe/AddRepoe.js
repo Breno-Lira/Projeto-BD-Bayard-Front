@@ -50,7 +50,7 @@ export default function AddVenda() {
         <div className='container'>
             <div className='row'>
                 <div className='col-md-6 offset-md-3 border rounded p-4 mt-4 shadow'>
-                    <h2 className="text-center m-4">Cadastrar Venda de Itens</h2>
+                    <h2 className="text-center m-4">Cadastrar uma Reposição</h2>
 
                     <form onSubmit={onSubmit}>
                         

@@ -17,7 +17,7 @@ export default function Repoe(){
     return (
         <div className='conteiner'>
 
-            <h1 className='text-center mt-4'>Repõem</h1>
+            <h1 className='text-center mt-4'>Reposições</h1>
 
             <Link className="btn btn-success mb-2" to="/addrepoe">Adicionar</Link>
 

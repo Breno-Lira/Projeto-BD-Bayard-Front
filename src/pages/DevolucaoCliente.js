@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 
-export default function Vendedor(){
+export default function DevolucaoCliente(){
     const [devclient, setDevCliente] = useState([])
 
     useEffect(() => {
@@ -48,7 +48,6 @@ export default function Vendedor(){
                             <td>{item.dataDevolucao}</td>
                             <td>{item.qtdProduto}</td>
                             <td>
-                                {/*<Link className='btn btn-outline-primary mx-2' to={`/editVendedor/${user.funcionario.cpf}`}>Editar</Link>*/}
                                 <button className='btn btn-danger mx-2' onClick={() => deleteDevCliente(item.idDevolucao)}>Delete</button>
                             </td>
                             </tr>
