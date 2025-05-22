@@ -22,6 +22,29 @@ export default function Inicio() {
         loadUsers()
     }
 
+    const [search, setSearch] = useState("");
+
+    const handleSearchChange = async (e) => {
+        const termo = e.target.value;
+        setSearch(termo);
+
+        if (termo.trim() === "") {
+            loadUsers(); // volta lista completa
+        } else {
+            try {
+                const res = await axios.get(`http://localhost:8080/clientes/buscar?termo=${termo}`);
+                if (res.status === 204) {
+                    setUsers([]); // limpa lista se não encontrou ninguém
+                } else {
+                    setUsers(res.data);
+                }
+            } catch (error) {
+                console.error("Erro na busca:", error);
+            }
+        }
+    };
+
+
     return (
         <div className='conteiner'>
 
@@ -29,13 +52,13 @@ export default function Inicio() {
 
             <Link className="btn btn-success" to="/addcliente">Adicionar</Link>
 
-            <div className='px-3'>
+            <div className="px-3">
                 <input
                     type="text"
                     className="form-control w-25"
-                    placeholder="Buscar por CPF"
-                    //value={search}
-                   // onChange={handleSearchChange}
+                    placeholder="Buscar por nome ou CPF"
+                    value={search}
+                    onChange={handleSearchChange}
                 />
             </div>
 
@@ -84,7 +107,7 @@ export default function Inicio() {
                                             onClick={() => deleteUser(user.cpf)}
 
                                         >
-                                            Delete</button>  
+                                            Delete</button>
 
                                     </td>
                                 </tr>
