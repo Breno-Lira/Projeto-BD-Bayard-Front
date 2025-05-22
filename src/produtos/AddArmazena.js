@@ -85,7 +85,7 @@ export default function AddArmazena() {
                                 <option value="">Selecione o produto</option>
                                 {produtos.map((p) => (
                                     <option key={p.codigo} value={p.codigo}>
-                                        {p.nome} - Código: {p.codigo}
+                                        {p.nome} - CÃ³digo: {p.codigo}
                                     </option>
                                 ))}
                             </select>

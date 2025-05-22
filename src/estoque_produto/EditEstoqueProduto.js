@@ -39,7 +39,7 @@ export default function EditEstoqueProduto() {
         <div className='container'>
             <div className='row'>
                 <div className='col-md-6 offset-md-3 border rounded p-4 mt-4 shadow'>
-                    <h2 className="text-center m-4">Editar Pagamento</h2>
+                    <h2 className="text-center m-4">Editar Estoque Produto</h2>
 
                     <form onSubmit={(e) => onSubmit(e)}>
                         <div className='mb-3'>
@@ -75,7 +75,7 @@ export default function EditEstoqueProduto() {
 
                         </div>
 
-                        <Link to="/pagamentos" className='btn btn-outline-danger mx-4'>Cancelar</Link>
+                        <Link to="/estoqueProduto" className='btn btn-outline-danger mx-4'>Cancelar</Link>
                         <button type='submit' className='btn btn-outline-success'>Salvar</button>
                     </form>
                 </div>

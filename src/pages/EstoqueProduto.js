@@ -24,36 +24,46 @@ export default function EstoqueProduto() {
     return (
         <div className='container mt-4'>
             <h2 className='text-center mb-4'>Estoque Produtos</h2>
-            <Link className='btn btn-success' to="/addestoqueProduto">Adicionar</Link>
-            <table className='table table-bordered'>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Codigo produto</th>
-                        <th>Quantidade de produtos</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {estoqueProduto.map((estoque_produto, index) => (
-                        <tr key={index}>
-                            <td>{estoque_produto.id_estoque}</td>
-                            <td>{estoque_produto.codigo_produto}</td>
-                            <td>{estoque_produto.quantidade_produtos}</td>
-                            <td>    
-                                <Link
-                                    className='btn btn-outline-primary mx-2'
-                                    to={`/editestoqueProduto/${estoque_produto.id_estoque}`}
-                                >
-                                    Editar
-                                </Link>
+            <div className="mb-4 text-center">
+                <Link className='btn btn-success btn-lg' to="/addestoqueProduto">Adicionar</Link>
+            </div>
 
-                                
-                                <button onClick={() => deleteEstoqueProduto(estoque_produto.id_estoque)} className='btn btn-danger btn-sm'>Excluir</button>
-                            </td>
+            <div className="table-responsive">
+                <table className="table table-striped table-bordered border shadow text-center align-middle fs-5">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Código Produto</th>
+                            <th scope="col">Quantidade de Produtos</th>
+                            <th scope="col">Ações</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {estoqueProduto.map((estoque_produto, index) => (
+                            <tr key={index}>
+                                <td>{estoque_produto.id_estoque}</td>
+                                <td>{estoque_produto.codigo_produto}</td>
+                                <td>{estoque_produto.quantidade_produtos}</td>
+                                <td style={{ whiteSpace: 'nowrap' }}>
+                                    <Link
+                                        className='btn btn-outline-primary mx-2'
+                                        to={`/editestoqueProduto/${estoque_produto.id_estoque}`}
+                                    >
+                                        Editar
+                                    </Link>
+                                    <button
+                                        onClick={() => deleteEstoqueProduto(estoque_produto.id_estoque)}
+                                        className='btn btn-danger'
+                                    >
+                                        Excluir
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
+
     )
 }
