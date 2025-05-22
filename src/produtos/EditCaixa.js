@@ -10,16 +10,18 @@ export default function EditCaixa() {
     const [caixa, setCaixa] = useState({
         funcionario: {
             cpf: "",
-            telefone: "",
+            telefone1: "",
+            telefone2: "",
             nome: "",
             vendedorResponsavel: false,
-            chefia: false
+            chefia: false,
+            ativo: false
         },
         login: "",
         senha: ""
     });
 
-    const { telefone, nome, vendedorResponsavel, chefia } = caixa.funcionario;
+    const { telefone1, telefone2, nome, vendedorResponsavel, ativo, chefia } = caixa.funcionario;
     const { login, senha } = caixa;
 
     useEffect(() => {
@@ -72,10 +74,12 @@ export default function EditCaixa() {
         const caixaPayload = {
             funcionario: {
                 cpf: caixa.funcionario.cpf,
-                telefone: caixa.funcionario.telefone,
+                telefone1: caixa.funcionario.telefone1,
+                telefone2: caixa.funcionario.telefone2,
                 nome: caixa.funcionario.nome,
                 vendedorResponsavel: caixa.funcionario.vendedorResponsavel,
-                chefia: caixa.funcionario.chefia
+                chefia: caixa.funcionario.chefia,
+                ativo: caixa.funcionario.ativo
             },
             login: (caixa.login),
             senha: (caixa.senha)
@@ -119,15 +123,26 @@ export default function EditCaixa() {
                                 required
                             />
 
-                            <label htmlFor='telefone' className='form-label mt-2'>Telefone</label>
+                            <label htmlFor='telefone' className='form-label mt-2'>Telefone1</label>
                             <input
                                 type="text"
                                 className='form-control'
-                                name='telefone'
-                                placeholder='Digite o telefone do caixa'
-                                value={telefone}
+                                name='telefone1'
+                                placeholder='Digite o telefone1 do caixa'
+                                value={telefone1}
                                 onChange={(e) => onInputChange(e)}
                                 required
+                            />
+
+                            <label htmlFor='telefone' className='form-label mt-2'>Telefone2</label>
+                            <input
+                                type="text"
+                                className='form-control'
+                                name='telefone2'
+                                placeholder='Digite o telefone2 do caixa'
+                                value={telefone2}
+                                onChange={(e) => onInputChange(e)}
+                               
                             />
 
                             <label htmlFor='login' className='form-label mt-2'>Login</label>
@@ -178,6 +193,21 @@ export default function EditCaixa() {
                                     id="chefia"
                                 />
                             </div>
+
+                            <div className="form-check form-check-inline">
+                                <label className="form-check-label me-2" htmlFor="ativo">
+                                    ativo
+                                </label>
+                                <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    name="ativo"
+                                    checked={ativo}
+                                    onChange={(e) => onCheckboxChange(e)}
+                                    id="ativo"
+                                />
+                            </div>
+                        
 
                         </div>
 

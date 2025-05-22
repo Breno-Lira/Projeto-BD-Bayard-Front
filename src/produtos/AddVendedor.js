@@ -8,14 +8,16 @@ export default function AddVendedor() {
 
     const [vendedor, setVendedor] = useState({
         cpf: "",
-        telefone: "",
+        telefone1: "",
+        telefone2: "",
         nome: "",
         VendedorResponsavel: false,
         chefia: false,
+        ativo: true,
         numVenda: ""
     })
 
-    const { cpf, telefone, nome, VendedorResponsavel, chefia, numVenda } = vendedor
+    const { cpf, telefone1, telefone2, nome, VendedorResponsavel, chefia, ativo, numVenda } = vendedor
 
     const onInputChange = (e) => {
         setVendedor({ ...vendedor, [e.target.name]: e.target.value })
@@ -27,21 +29,23 @@ export default function AddVendedor() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-      
+
         const vendedorPayload = {
-          funcionario: {
-            cpf: vendedor.cpf,
-            telefone: vendedor.telefone,
-            nome: vendedor.nome,
-            vendedorResponsavel: vendedor.VendedorResponsavel,
-            chefia: vendedor.chefia
-          },
-          numVenda: parseInt(vendedor.numVenda)
+            funcionario: {
+                cpf: vendedor.cpf,
+                telefone1: vendedor.telefone1,
+                telefone2: vendedor.telefone2,
+                nome: vendedor.nome,
+                vendedorResponsavel: vendedor.VendedorResponsavel,
+                chefia: vendedor.chefia,
+                ativo: vendedor.ativo
+            },
+            numVenda: parseInt(vendedor.numVenda)
         };
-      
+
         await axios.post("http://localhost:8080/vendedor/add", vendedorPayload);
         navigate("/vendedor");
-      };
+    };
 
     return (
         <div className='container'>
@@ -73,15 +77,25 @@ export default function AddVendedor() {
                                 required
                             />
 
-                            <label htmlFor='telefone' className='form-label mt-2'>Telefone</label>
+                            <label htmlFor='telefone' className='form-label mt-2'>Telefone1</label>
                             <input
                                 type="text"
                                 className='form-control'
-                                name='telefone'
-                                placeholder='Digite o telefone do vendedor'
-                                value={telefone}
+                                name='telefone1'
+                                placeholder='Digite o telefone1 do vendedor'
+                                value={telefone1}
                                 onChange={(e) => onInputChange(e)}
                                 required
+                            />
+
+                            <label htmlFor='telefone' className='form-label mt-2'>Telefone2</label>
+                            <input
+                                type="text"
+                                className='form-control'
+                                name='telefone2'
+                                placeholder='Digite o telefone2 do vendedor'
+                                value={telefone2}
+                                onChange={(e) => onInputChange(e)}
                             />
 
                             <label htmlFor='numVenda' className='form-label mt-2'>Número de Vendas</label>

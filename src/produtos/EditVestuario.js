@@ -14,7 +14,8 @@ export default function EditVestuario() {
         produto: {
             codigo: "",
             nome: "",
-            cor: "",
+            cor_primaria: "",
+            cor_secundaria: "",
             preco: ""
         }
     })
@@ -23,7 +24,7 @@ export default function EditVestuario() {
         const { name, value } = e.target
 
         // Atualiza campo do produto (nome, cor, preco) ou campo próprio (genero, tamanho...)
-        if (["codigo", "nome", "cor", "preco"].includes(name)) {
+        if (["codigo", "nome", "cor_primaria", "cor_secundaria", "preco"].includes(name)) {
             setVestuario(prev => ({
                 ...prev,
                 produto: {
@@ -65,7 +66,7 @@ export default function EditVestuario() {
     return (
         <div className='container'>
             <div className='row'>
-                <div className='col-md-8 offset-md-2 border rounded p-4 mt-4 shadow'>
+                <div className='col-md-6 offset-md-3 border rounded p-4 mt-4 shadow'>
                     <h2 className="text-center m-4">Editar Vestuário</h2>
 
                     <form onSubmit={onSubmit}>
@@ -87,12 +88,20 @@ export default function EditVestuario() {
                                 onChange={onInputChange}
                                 required
                             />
-                            <label className='form-label'>Cor</label>
+                            <label className='form-label'>Cor1</label>
                             <input
                                 type="text"
                                 className='form-control'
-                                name='cor'
-                                value={vestuario.produto.cor}
+                                name='cor_primaria'
+                                value={vestuario.produto.cor_primaria}
+                                onChange={onInputChange}
+                            />
+                             <label className='form-label'>Cor2</label>
+                            <input
+                                type="text"
+                                className='form-control'
+                                name='cor_secundaria'
+                                value={vestuario.produto.cor_secundaria}
                                 onChange={onInputChange}
                             />
                             <label className='form-label'>Preço</label>

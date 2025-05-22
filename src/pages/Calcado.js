@@ -31,8 +31,10 @@ export default function Calcados() {
                     <tr>
                         <th>Código</th>
                         <th>Nome</th>
-                        <th>Cor</th>
+                        <th>Cor1</th>
+                        <th>Cor3</th>
                         <th>Preço</th>
+                        <th>QtdProduto</th>
                         <th>Gênero</th>
                         <th>Tamanho</th>
                         <th>Faixa Etária</th>
@@ -45,8 +47,10 @@ export default function Calcados() {
                             <tr key={index}>
                                 <td>{calcado.produto.codigo}</td>
                                 <td>{calcado.produto.nome}</td>
-                                <td>{calcado.produto.cor}</td>
+                                <td>{calcado.produto.cor_primaria}</td>
+                                <td>{calcado.produto.cor_secundaria}</td>
                                 <td>R$ {calcado.produto.preco.toFixed(2)}</td>
+                                <td>{calcado.produto.qtdProduto}</td>
                                 <td>{calcado.genero}</td>
                                 <td>{calcado.tamanho}</td>
                                 <td>{calcado.faixaEtaria}</td>

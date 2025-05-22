@@ -9,11 +9,12 @@ export default function AddProduto() {
     const [produto, setProduto] = useState({
         codigo: "",
         nome: "",
-        cor: "",
+        cor_primaria: "",
+        cor_secundaria: "",
         preco: ""
     })
 
-    const { codigo, nome, cor, preco } = produto
+    const { codigo, nome, cor_primaria, cor_secundaria, preco } = produto
 
     const onInputChange = (e) => {
         setProduto({ ...produto, [e.target.name]: e.target.value })
@@ -33,7 +34,7 @@ export default function AddProduto() {
 
                     <form onSubmit={(e) => onSubmit(e)}>
                         <div className='mb-3'>
-                            <label htmlFor='codigo' className='form-label'>Código</label>
+                          {/*  <label htmlFor='codigo' className='form-label'>Código</label>
                             <input
                                 type="text"
                                 className='form-control'
@@ -42,7 +43,7 @@ export default function AddProduto() {
                                 value={codigo}
                                 onChange={(e) => onInputChange(e)}
                                 required
-                            />
+                            /> */}
                             <label htmlFor='nome' className='form-label'>Nome</label>
                             <input
                                 type="text"
@@ -53,13 +54,22 @@ export default function AddProduto() {
                                 onChange={(e) => onInputChange(e)}
                                 required
                             />
-                            <label htmlFor='cor' className='form-label'>Cor</label>
+                            <label htmlFor='cor_primaria' className='form-label'>Cor_primaria</label>
                             <input
                                 type="text"
                                 className='form-control'
-                                name='cor'
-                                placeholder='Digite a cor'
-                                value={cor}
+                                name='cor_primaria'
+                                placeholder='Digite a cor_primaria'
+                                value={cor_primaria}
+                                onChange={(e) => onInputChange(e)}
+                            />
+                            <label htmlFor='cor_secundaria' className='form-label'>Cor_secundaria</label>
+                            <input
+                                type="text"
+                                className='form-control'
+                                name='cor_secundaria'
+                                placeholder='Digite a cor_secundaria'
+                                value={cor_secundaria}
                                 onChange={(e) => onInputChange(e)}
                             />
                             <label htmlFor='preco' className='form-label'>Preço</label>

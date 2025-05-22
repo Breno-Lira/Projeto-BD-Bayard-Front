@@ -10,16 +10,18 @@ export default function EditEstoquista() {
   const [estoquista, setEstoquista] = useState({
     funcionario: {
       cpf: "",
-      telefone: "",
+      telefone1: "",
+      telefone2: "",
       nome: "",
       vendedorResponsavel: false,
-      chefia: false
+      chefia: false,
+      ativo: false,
     },
     dataUltimoInventario: "",
     acessoEstoque: ""
   });
 
-  const { telefone, nome, vendedorResponsavel, chefia, cpf: cpfFuncionario } = estoquista.funcionario;
+  const { telefone1, telefone2, nome, vendedorResponsavel, chefia, ativo, cpf: cpfFuncionario } = estoquista.funcionario;
   const { dataUltimoInventario, acessoEstoque } = estoquista;
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export default function EditEstoquista() {
       loadEstoquista();
     }
   }, [cpf]);
-  
+
 
   const loadEstoquista = async () => {
     console.log("Carregando estoquista com CPF:", cpf);
@@ -35,7 +37,7 @@ export default function EditEstoquista() {
       const result = await axios.get(`http://localhost:8080/estoquista/${cpf}`);
       console.log("Dados carregados:", result.data);
       const data = result.data;
-  
+
       setEstoquista({
         ...data,
         dataUltimoInventario: data.dataUltimoInventario === null ? "" : data.dataUltimoInventario
@@ -43,7 +45,7 @@ export default function EditEstoquista() {
     } catch (error) {
       console.error("Erro ao carregar estoquista:", error);
     }
-  }; 
+  };
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -81,7 +83,9 @@ export default function EditEstoquista() {
     const estoquistaPayload = {
       funcionario: {
         cpf: estoquista.funcionario.cpf,
-        telefone: estoquista.funcionario.telefone,
+        telefone1: estoquista.funcionario.telefone1,
+        telefone2: estoquista.funcionario.telefone2,
+        ativo: estoquista.funcionario.ativo,
         nome: estoquista.funcionario.nome,
         vendedorResponsavel: estoquista.funcionario.vendedorResponsavel,
         chefia: estoquista.funcionario.chefia
@@ -126,15 +130,25 @@ export default function EditEstoquista() {
                 required
               />
 
-              <label htmlFor='telefone' className='form-label mt-2'>Telefone</label>
+              <label htmlFor='telefone' className='form-label mt-2'>Telefone1</label>
               <input
                 type="text"
                 className='form-control'
-                name='telefone'
+                name='telefone1'
                 placeholder='Digite o telefone do estoquista'
-                value={telefone}
+                value={telefone1}
                 onChange={onInputChange}
                 required
+              />
+
+              <label htmlFor='telefone' className='form-label mt-2'>Telefone2</label>
+              <input
+                type="text"
+                className='form-control'
+                name='telefone2'
+                placeholder='Digite o telefone do estoquista'
+                value={telefone2}
+                onChange={onInputChange}
               />
 
               <label htmlFor='dataUltimoInventario' className='form-label mt-2'>Data do último inventário</label>
@@ -183,6 +197,20 @@ export default function EditEstoquista() {
                   checked={chefia}
                   onChange={onCheckboxChange}
                   id="chefia"
+                />
+              </div>
+
+              <div className="form-check form-check-inline">
+                <label className="form-check-label me-2" htmlFor="ativo">
+                  ativo
+                </label>
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  name="ativo"
+                  checked={ativo}
+                  onChange={onCheckboxChange}
+                  id="ativo"
                 />
               </div>
             </div>

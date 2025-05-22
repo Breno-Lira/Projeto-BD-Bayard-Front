@@ -9,7 +9,8 @@ export default function Adduser() {
     const [user, setUser] = useState({
         cpf: "",
         nome: "",
-        interesse: "",
+        interesse1: "",
+        interesse2: "",
         dataNascimento: "",
         cidade: "",
         bairro: "",
@@ -22,7 +23,8 @@ export default function Adduser() {
     const {
         cpf,
         nome,
-        interesse,
+        interesse1,
+        interesse2,
         dataNascimento,
         cidade,
         bairro,
@@ -68,10 +70,14 @@ export default function Adduser() {
                                 Nome
                             </label>
                             <input type={"text"} className='form-control' name='nome' placeholder='Digite um nome' value={nome.toString()} onChange={(e) => onInputChange(e)}></input>
-                            <label htmlFor='Interesse' className='form-label'>
-                                Interesse
+                            <label htmlFor='Interesse1' className='form-label'>
+                                Interesse1
                             </label>
-                            <input type={"text"} className='form-control' name='interesse' placeholder='Digite um nome' value={interesse.toString()} onChange={(e) => onInputChange(e)}></input>
+                            <input type={"text"} className='form-control' name='interesse1' placeholder='Digite um nome' value={interesse1.toString()} onChange={(e) => onInputChange(e)}></input>
+                            <label htmlFor='Interesse2' className='form-label'>
+                                Interesse2
+                            </label>
+                            <input type={"text"} className='form-control' name='interesse2' placeholder='Digite um nome' value={interesse2.toString()} onChange={(e) => onInputChange(e)}></input>
                             <label htmlFor='DataNascimento' className='form-label'>
                                 Data de Nascimento
                             </label>

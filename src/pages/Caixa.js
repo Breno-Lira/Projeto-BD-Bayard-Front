@@ -34,10 +34,12 @@ export default function Caixa(){
                     <thead>
                         <tr>
                             <th scope="col">Cpf</th>
-                            <th scope="col">Telefone</th>
+                            <th scope="col">Telefone1</th>
+                            <th scope="col">Telefone2</th>
                             <th scope="col">Nome</th>
                             <th scope="col">vendedorResponsavel</th>
                             <th scope="col">chefia</th>
+                            <th scope="col">ativo</th>
                             <th scope="col">Login</th>
                             <th scope="col">Senha</th>
                         </tr>
@@ -46,10 +48,12 @@ export default function Caixa(){
                         {users.map((user, index) => (
                             <tr key={index}>
                             <td>{user.funcionario.cpf}</td>
-                            <td>{user.funcionario.telefone}</td>
+                            <td>{user.funcionario.telefone1}</td>
+                            <td>{user.funcionario.telefone2}</td>
                             <td>{user.funcionario.nome}</td>
                             <td>{user.funcionario.vendedorResponsavel ? 'Sim' : 'Não'}</td>
                             <td>{user.funcionario.chefia ? 'Sim' : 'Não'}</td>
+                            <td>{user.funcionario.ativo ? 'Sim' : 'Não'}</td>
                             <td>{user.login}</td>
                             <td>{user.senha}</td>
                             <td>

@@ -8,15 +8,17 @@ export default function AddCaixa() {
 
     const [caixa, setCaixa] = useState({
         cpf: "",
-        telefone: "",
+        telefone1: "",
+        telefone2: "",
         nome: "",
         VendedorResponsavel: false,
         chefia: false,
+        ativo: true,
         login: "",
         senha: ""
     })
 
-    const { cpf, telefone, nome, VendedorResponsavel, chefia, login, senha } = caixa
+    const { cpf, telefone1, telefone2, nome, VendedorResponsavel, chefia, login, senha } = caixa
 
     const onInputChange = (e) => {
         setCaixa({ ...caixa, [e.target.name]: e.target.value })
@@ -32,10 +34,12 @@ export default function AddCaixa() {
         const caixaPayload = {
           funcionario: {
             cpf: caixa.cpf,
-            telefone: caixa.telefone,
+            telefone1: caixa.telefone1,
+            telefone2: caixa.telefone2,
             nome: caixa.nome,
             vendedorResponsavel: caixa.VendedorResponsavel,
-            chefia: caixa.chefia
+            chefia: caixa.chefia,
+            ativo: caixa.ativo
           },
           login: (caixa.login),
           senha: (caixa.senha)
@@ -75,15 +79,25 @@ export default function AddCaixa() {
                                 required
                             />
 
-                            <label htmlFor='telefone' className='form-label mt-2'>Telefone</label>
+                            <label htmlFor='telefone' className='form-label mt-2'>Telefone1</label>
                             <input
                                 type="text"
                                 className='form-control'
-                                name='telefone'
-                                placeholder='Digite o telefone do caixa'
-                                value={telefone}
+                                name='telefone1'
+                                placeholder='Digite o telefone1 do caixa'
+                                value={telefone1}
                                 onChange={(e) => onInputChange(e)}
                                 required
+                            />
+
+                            <label htmlFor='telefone' className='form-label mt-2'>Telefone2</label>
+                            <input
+                                type="text"
+                                className='form-control'
+                                name='telefone2'
+                                placeholder='Digite o telefone2 do caixa'
+                                value={telefone2}
+                                onChange={(e) => onInputChange(e)}
                             />
 
                             <label htmlFor='login' className='form-label mt-2'>Login</label>

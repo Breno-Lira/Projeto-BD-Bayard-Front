@@ -10,11 +10,12 @@ export default function EditProduto() {
     const [produto, setProduto] = useState({
         codigo: "",
         nome: "",
-        cor: "",
+        cor_primaria: "",
+        cor_secundaria: "",
         preco: ""
     })
 
-    const { codigo, nome, cor, preco } = produto
+    const { codigo, nome, cor_primaria, cor_secundaria, preco } = produto
 
     useEffect(() => {
         loadProduto()
@@ -60,12 +61,20 @@ export default function EditProduto() {
                                 onChange={(e) => onInputChange(e)}
                                 required
                             />
-                            <label htmlFor='cor' className='form-label'>Cor</label>
+                            <label htmlFor='cor_primaria' className='form-label'>Cor_primaria</label>
                             <input
                                 type="text"
                                 className='form-control'
-                                name='cor'
-                                value={cor}
+                                name='cor_primaria'
+                                value={cor_primaria}
+                                onChange={(e) => onInputChange(e)}
+                            />
+                             <label htmlFor='cor_secundaria' className='form-label'>Cor_secundaria</label>
+                            <input
+                                type="text"
+                                className='form-control'
+                                name='cor_secundaria'
+                                value={cor_secundaria}
                                 onChange={(e) => onInputChange(e)}
                             />
                             <label htmlFor='preco' className='form-label'>Preço</label>

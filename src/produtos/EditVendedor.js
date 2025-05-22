@@ -10,15 +10,17 @@ export default function EditVendedor() {
     const [vendedor, setVendedor] = useState({
         funcionario: {
             cpf: "",
-            telefone: "",
+            telefone1: "",
+            telefone2: "",
             nome: "",
             vendedorResponsavel: false,
-            chefia: false
+            chefia: false,
+            ativo: false,
         },
         numVenda: ""
     });
 
-    const { telefone, nome, vendedorResponsavel, chefia } = vendedor.funcionario;
+    const { telefone1, telefone2, nome, vendedorResponsavel, chefia, ativo } = vendedor.funcionario;
     const { numVenda } = vendedor;
 
     useEffect(() => {
@@ -74,7 +76,8 @@ export default function EditVendedor() {
                 telefone: vendedor.funcionario.telefone,
                 nome: vendedor.funcionario.nome,
                 vendedorResponsavel: vendedor.funcionario.vendedorResponsavel,
-                chefia: vendedor.funcionario.chefia
+                chefia: vendedor.funcionario.chefia,
+                ativo: vendedor.funcionario.ativo
             },
             numVenda: parseInt(vendedor.numVenda)
         };
@@ -117,15 +120,25 @@ export default function EditVendedor() {
                                 required
                             />
 
-                            <label htmlFor='telefone' className='form-label mt-2'>Telefone</label>
+                            <label htmlFor='telefone' className='form-label mt-2'>Telefone1</label>
                             <input
                                 type="text"
                                 className='form-control'
-                                name='telefone'
-                                placeholder='Digite o telefone do vendedor'
-                                value={telefone}
+                                name='telefone1'
+                                placeholder='Digite o telefone1 do vendedor'
+                                value={telefone1}
                                 onChange={(e) => onInputChange(e)}
-                                required
+                            />
+
+                            <label htmlFor='telefone' className='form-label mt-2'>Telefone2</label>
+                            <input
+                                type="text"
+                                className='form-control'
+                                name='telefone2'
+                                placeholder='Digite o telefone2 do vendedor'
+                                value={telefone2}
+                                onChange={(e) => onInputChange(e)}
+                                
                             />
 
                             <label htmlFor='numVenda' className='form-label mt-2'>Número de Vendas</label>
@@ -164,6 +177,20 @@ export default function EditVendedor() {
                                     checked={chefia}
                                     onChange={(e) => onCheckboxChange(e)}
                                     id="chefia"
+                                />
+                            </div>
+
+                            <div className="form-check form-check-inline">
+                                <label className="form-check-label me-2" htmlFor="ativo">
+                                    ativo
+                                </label>
+                                <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    name="ativo"
+                                    checked={ativo}
+                                    onChange={(e) => onCheckboxChange(e)}
+                                    id="ativo"
                                 />
                             </div>
 

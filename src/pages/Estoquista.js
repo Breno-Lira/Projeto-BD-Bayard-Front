@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 
-export default function Estoquista(){
+export default function Estoquista() {
     const [users, setUsers] = useState([])
 
     const { cpf } = useParams()
@@ -33,10 +33,12 @@ export default function Estoquista(){
                     <thead>
                         <tr>
                             <th scope="col">Cpf</th>
-                            <th scope="col">Telefone</th>
+                            <th scope="col">Telefone1</th>
+                            <th scope="col">Telefone2</th>
                             <th scope="col">Nome</th>
                             <th scope="col">vendedorResponsavel</th>
                             <th scope="col">chefia</th>
+                            <th scope="col">ativo</th>
                             <th scope="col">dataUltimoInventario</th>
                             <th scope="col">acessoEstoque</th>
                         </tr>
@@ -44,17 +46,19 @@ export default function Estoquista(){
                     <tbody>
                         {users.map((user, index) => (
                             <tr key={index}>
-                            <td>{user.funcionario.cpf}</td>
-                            <td>{user.funcionario.telefone}</td>
-                            <td>{user.funcionario.nome}</td>
-                            <td>{user.funcionario.vendedorResponsavel ? 'Sim' : 'Não'}</td>
-                            <td>{user.funcionario.chefia ? 'Sim' : 'Não'}</td>
-                            <td>{user.dataUltimoInventario}</td>
-                            <td>{user.acessoEstoque}</td>
-                            <td>
-                                <Link className='btn btn-outline-primary mx-2' to={`/editEstoquista/${user.funcionario.cpf}`}>Editar</Link>
-                                <button className='btn btn-danger mx-2' onClick={() => deleteUser(user.funcionario.cpf)}>Delete</button>
-                            </td>
+                                <td>{user.funcionario.cpf}</td>
+                                <td>{user.funcionario.telefone1}</td>
+                                <td>{user.funcionario.telefone2}</td>
+                                <td>{user.funcionario.nome}</td>
+                                <td>{user.funcionario.vendedorResponsavel ? 'Sim' : 'Não'}</td>
+                                <td>{user.funcionario.chefia ? 'Sim' : 'Não'}</td>
+                                <td>{user.funcionario.ativo ? 'Sim' : 'Não'}</td>
+                                <td>{user.dataUltimoInventario}</td>
+                                <td>{user.acessoEstoque ? 'Sim' : 'Não'}</td>
+                                <td>
+                                    <Link className='btn btn-outline-primary mx-2' to={`/editEstoquista/${user.funcionario.cpf}`}>Editar</Link>
+                                    <button className='btn btn-danger mx-2' onClick={() => deleteUser(user.funcionario.cpf)}>Delete</button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

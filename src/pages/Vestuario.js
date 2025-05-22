@@ -35,8 +35,10 @@ export default function Vestuarios() {
                         <tr>
                             <th scope="col">Código</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">Cor</th>
+                            <th scope="col">Cor1</th>
+                            <th scope="col">Cor2</th>
                             <th scope="col">Preço</th>
+                            <th scope="col">QtdProduto</th>
                             <th scope="col">Gênero</th>
                             <th scope="col">Tamanho</th>
                             <th scope="col">Faixa Etária</th>
@@ -49,8 +51,10 @@ export default function Vestuarios() {
                                 <tr key={index}>
                                     <td>{vestuario.produto.codigo}</td>
                                     <td>{vestuario.produto.nome}</td>
-                                    <td>{vestuario.produto.cor}</td>
+                                    <td>{vestuario.produto.cor_primaria}</td>
+                                    <td>{vestuario.produto.cor_secundaria}</td>
                                     <td>R$ {vestuario.produto.preco.toFixed(2)}</td>
+                                     <td>{vestuario.produto.qtdProduto}</td>
                                     <td>{vestuario.genero}</td>
                                     <td>{vestuario.tamanho}</td>
                                     <td>{vestuario.faixaEtaria}</td>

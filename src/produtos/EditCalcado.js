@@ -11,7 +11,8 @@ export default function AddCalcado() {
         produto: {
             codigo: "",
             nome: "",
-            cor: "",
+            cor_primaria: "",
+            cor_secundaria: "",
             preco: ""
         },
         genero: "",
@@ -22,7 +23,7 @@ export default function AddCalcado() {
     const onInputChange = (e) => {
         const { name, value } = e.target
 
-        if (['codigo', 'nome', 'cor', 'preco'].includes(name)) {
+        if (['codigo', 'nome', "cor_primaria", "cor_secundaria", 'preco'].includes(name)) {
             setCalcado(prev => ({
                 ...prev,
                 produto: {
@@ -75,9 +76,13 @@ export default function AddCalcado() {
                             <input type="text" className='form-control' name='nome' onChange={onInputChange}
                                 value={calcado.produto.nome} required />
 
-                            <label>Cor</label>
-                            <input type="text" className='form-control' name='cor' onChange={onInputChange}
-                                value={calcado.produto.cor} />
+                            <label>Cor1</label>
+                            <input type="text" className='form-control' name='cor_primaria' onChange={onInputChange}
+                                value={calcado.produto.cor_primaria} />
+
+                            <label>Cor2</label>
+                            <input type="text" className='form-control' name='cor_secundaria' onChange={onInputChange}
+                                value={calcado.produto.cor_secundaria} />
 
                             <label>Preço</label>
                             <input type="number" step="0.01" className='form-control' name='preco' onChange={onInputChange}

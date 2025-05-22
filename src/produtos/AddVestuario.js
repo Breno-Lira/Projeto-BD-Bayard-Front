@@ -10,7 +10,8 @@ export default function AddVestuario() {
         produto: {
             codigo: "",
             nome: "",
-            cor: "",
+            cor_primaria: "",
+            cor_secundaria: "",
             preco: ""
         },
         genero: "",
@@ -22,7 +23,7 @@ export default function AddVestuario() {
         const { name, value } = e.target
 
         // se o campo for do produto, atualiza dentro de produto
-        if (["codigo", "nome", "cor", "preco"].includes(name)) {
+        if (["codigo", "nome", "cor_primaria", "cor_secundaria", "preco"].includes(name)) {
             setVestuario({
                 ...vestuario,
                 produto: { ...vestuario.produto, [name]: value }
@@ -49,7 +50,7 @@ export default function AddVestuario() {
 
                     <form onSubmit={onSubmit}>
                         <div className='mb-3'>
-                            <label className='form-label'>Código</label>
+                           {/* <label className='form-label'>Código</label>
                             <input
                                 type="text"
                                 className='form-control'
@@ -57,7 +58,7 @@ export default function AddVestuario() {
                                 value={vestuario.produto.codigo}
                                 onChange={onInputChange}
                                 required
-                            />
+                            /> */}
 
                             <label className='form-label'>Nome</label>
                             <input
@@ -69,12 +70,21 @@ export default function AddVestuario() {
                                 required
                             />
 
-                            <label className='form-label'>Cor</label>
+                            <label className='form-label'>Cor1</label>
                             <input
                                 type="text"
                                 className='form-control'
-                                name='cor'
-                                value={vestuario.produto.cor}
+                                name='cor_primaria'
+                                value={vestuario.produto.cor_primaria}
+                                onChange={onInputChange}
+                            />
+
+                            <label className='form-label'>Cor2</label>
+                            <input
+                                type="text"
+                                className='form-control'
+                                name='cor_secundaria'
+                                value={vestuario.produto.cor_secundaria}
                                 onChange={onInputChange}
                             />
 

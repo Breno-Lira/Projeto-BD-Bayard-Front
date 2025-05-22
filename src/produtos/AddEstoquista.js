@@ -8,15 +8,17 @@ export default function AddEstoquista() {
 
     const [estoquista, setEstoquista] = useState({
         cpf: "",
-        telefone: "",
+        telefone1: "",
+        telefone2: "",
         nome: "",
         VendedorResponsavel: false,
         chefia: false,
+        ativo: true,
         dataUltimoInventario: "",
         acessoEstoque: ""
     })
 
-    const { cpf, telefone, nome, VendedorResponsavel, chefia, dataUltimoInventario, acessoEstoque } = estoquista
+    const { cpf, telefone1, telefone2, nome, VendedorResponsavel, chefia, ativo, dataUltimoInventario, acessoEstoque } = estoquista
 
     const onInputChange = (e) => {
         setEstoquista({ ...estoquista, [e.target.name]: e.target.value })
@@ -28,22 +30,24 @@ export default function AddEstoquista() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-      
+
         const estoquistaPayload = {
-          funcionario: {
-            cpf: estoquista.cpf,
-            telefone: estoquista.telefone,
-            nome: estoquista.nome,
-            vendedorResponsavel: estoquista.VendedorResponsavel,
-            chefia: estoquista.chefia
-          },
-          dataUltimoInventario: (estoquista.dataUltimoInventario),
-          acessoEstoque: (estoquista.acessoEstoque)
+            funcionario: {
+                cpf: estoquista.cpf,
+                telefone1: estoquista.telefone1,
+                telefone2: estoquista.telefone2,
+                nome: estoquista.nome,
+                vendedorResponsavel: estoquista.VendedorResponsavel,
+                chefia: estoquista.chefia,
+                ativo: estoquista.ativo
+            },
+            dataUltimoInventario: (estoquista.dataUltimoInventario),
+            acessoEstoque: (estoquista.acessoEstoque)
         };
-      
+
         await axios.post("http://localhost:8080/estoquista/add", estoquistaPayload);
         navigate("/estoquista");
-      };
+    };
 
     return (
         <div className='container'>
@@ -75,15 +79,25 @@ export default function AddEstoquista() {
                                 required
                             />
 
-                            <label htmlFor='telefone' className='form-label mt-2'>Telefone</label>
+                            <label htmlFor='telefone1' className='form-label mt-2'>Telefone1</label>
                             <input
                                 type="text"
                                 className='form-control'
-                                name='telefone'
+                                name='telefone1'
                                 placeholder='Digite o telefone do estoquista'
-                                value={telefone}
+                                value={telefone1}
                                 onChange={(e) => onInputChange(e)}
                                 required
+                            />
+
+                            <label htmlFor='telefone2' className='form-label mt-2'>Telefone2</label>
+                            <input
+                                type="text"
+                                className='form-control'
+                                name='telefone2'
+                                placeholder='Digite o telefone do estoquista'
+                                value={telefone2}
+                                onChange={(e) => onInputChange(e)}
                             />
 
                             <label htmlFor='dataUltimoInventario' className='form-label mt-2'>Data do último inventário</label>
@@ -94,9 +108,8 @@ export default function AddEstoquista() {
                                 placeholder='Escolha a data do último inventário'
                                 value={dataUltimoInventario}
                                 onChange={(e) => onInputChange(e)}
-                                required
                             />
-                             <label htmlFor='acessoEstoque' className='form-label mt-2'>Acesso ao Estoque</label>
+                            <label htmlFor='acessoEstoque' className='form-label mt-2'>Acesso ao Estoque</label>
                             <input
                                 type="text"
                                 className='form-control'

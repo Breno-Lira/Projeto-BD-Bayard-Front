@@ -35,8 +35,10 @@ export default function Produtos() {
                         <tr>
                             <th scope="col">Código</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">Cor</th>
+                            <th scope="col">Cor1</th>
+                            <th scope="col">Cor2</th>
                             <th scope="col">Preço</th>
+                            <th scope="col">QtdProduto</th>
                             <th scope="col">Ações</th>
                         </tr>
                     </thead>
@@ -46,8 +48,10 @@ export default function Produtos() {
                                 <tr key={index}>
                                     <td>{produto.codigo}</td>
                                     <td>{produto.nome}</td>
-                                    <td>{produto.cor}</td>
+                                    <td>{produto.cor_primaria}</td>
+                                    <td>{produto.cor_secundaria}</td>
                                     <td>R$ {produto.preco.toFixed(2)}</td>
+                                    <td>{produto.qtdProduto}</td>
                                     <td>
                                         <Link
                                             className='btn btn-outline-primary mx-2'

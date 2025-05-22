@@ -33,10 +33,12 @@ export default function Vendedor(){
                     <thead>
                         <tr>
                             <th scope="col">Cpf</th>
-                            <th scope="col">Telefone</th>
+                            <th scope="col">Telefone1</th>
+                            <th scope="col">Telefone2</th>
                             <th scope="col">Nome</th>
                             <th scope="col">vendedorResponsavel</th>
                             <th scope="col">chefia</th>
+                            <th scope="col">ativo</th>
                             <th scope="col">numVenda</th>
                         </tr>
                     </thead>
@@ -44,10 +46,12 @@ export default function Vendedor(){
                         {users.map((user, index) => (
                             <tr key={index}>
                             <td>{user.funcionario.cpf}</td>
-                            <td>{user.funcionario.telefone}</td>
+                            <td>{user.funcionario.telefone1}</td>
+                            <td>{user.funcionario.telefone2}</td>
                             <td>{user.funcionario.nome}</td>
                             <td>{user.funcionario.vendedorResponsavel ? 'Sim' : 'Não'}</td>
                             <td>{user.funcionario.chefia ? 'Sim' : 'Não'}</td>
+                            <td>{user.funcionario.ativo ? 'Sim' : 'Não'}</td>
                             <td>{user.numVenda}</td>
                             <td>
                                 <Link className='btn btn-outline-primary mx-2' to={`/editVendedor/${user.funcionario.cpf}`}>Editar</Link>

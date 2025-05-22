@@ -35,7 +35,8 @@ export default function Inicio() {
                         <tr>
                             <th scope="col">Cpf</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">Interesse</th>
+                            <th scope="col">Interesse1</th>
+                            <th scope="col">Interesse2</th>
                             <th scope="col">Dat_nascimento</th>
                             <th scope="col">cidade</th>
                             <th scope="col">bairro</th>
@@ -52,7 +53,8 @@ export default function Inicio() {
                                 <tr>
                                     <td>{user.cpf}</td>
                                     <td>{user.nome}</td>
-                                    <td>{user.interesse}</td>
+                                    <td>{user.interesse1}</td>
+                                    <td>{user.interesse2}</td>
                                     <td>{user.dataNascimento}</td>
                                     <td>{user.cidade}</td>
                                     <td>{user.bairro}</td>
@@ -72,7 +74,7 @@ export default function Inicio() {
                                             onClick={() => deleteUser(user.cpf)}
 
                                         >
-                                            Delete</button>
+                                            Delete</button>  
 
                                     </td>
                                 </tr>

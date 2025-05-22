@@ -10,7 +10,8 @@ export default function AddCalcado() {
         produto: {
             codigo: "",
             nome: "",
-            cor: "",
+            cor_primaria: "",
+            cor_secundaria: "",
             preco: ""
         },
         genero: "",
@@ -21,7 +22,7 @@ export default function AddCalcado() {
     const onInputChange = (e) => {
         const { name, value } = e.target
 
-        if (['codigo', 'nome', 'cor', 'preco'].includes(name)) {
+        if (['codigo', 'nome', "cor_primaria", "cor_secundaria", 'preco'].includes(name)) {
             setCalcado(prev => ({
                 ...prev,
                 produto: {
@@ -48,14 +49,17 @@ export default function AddCalcado() {
 
                     <form onSubmit={onSubmit}>
                         <div className='mb-3'>
-                            <label>Código</label>
-                            <input type="text" className='form-control' name='codigo' onChange={onInputChange} required />
+                          {/*  <label>Código</label>
+                            <input type="text" className='form-control' name='codigo' onChange={onInputChange} required /> */}
 
                             <label>Nome</label>
                             <input type="text" className='form-control' name='nome' onChange={onInputChange} required />
 
-                            <label>Cor</label>
-                            <input type="text" className='form-control' name='cor' onChange={onInputChange} />
+                            <label>Cor1</label>
+                            <input type="text" className='form-control' name='cor_primaria' onChange={onInputChange} />
+
+                            <label>Cor2</label>
+                            <input type="text" className='form-control' name='cor_secundaria' onChange={onInputChange} />
 
                             <label>Preço</label>
                             <input type="number" step="0.01" className='form-control' name='preco' onChange={onInputChange} required />
