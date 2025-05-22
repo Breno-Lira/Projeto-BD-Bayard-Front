@@ -22,12 +22,44 @@ export default function Vestuarios() {
         loadVestuarios()
     }
 
+    const [search, setSearch] = useState("");
+
+    const handleSearchChange = async (e) => {
+        const termo = e.target.value;
+        setSearch(termo);
+
+        if (termo.trim() === "") {
+            loadVestuarios(); // volta lista completa
+        } else {
+            try {
+                const res = await axios.get(`http://localhost:8080/vestuario/buscar?termo=${termo}`);
+                if (res.status === 204) {
+                    setVestuarios([]); // limpa lista se não encontrou ninguém
+                } else {
+                    setVestuarios(res.data);
+                }
+            } catch (error) {
+                console.error("Erro na busca:", error);
+            }
+        }
+    };
+
     return (
         <div className='container'>
 
             <h1 className='text-center mt-4'>Vestuários</h1>
 
             <Link className="btn btn-success mb-3" to="/addvestuario">Adicionar</Link>
+
+            <div className="px-3">
+                <input
+                    type="text"
+                    className="form-control w-25"
+                    placeholder="Buscar por nome ou CPF"
+                    value={search}
+                    onChange={handleSearchChange}
+                />
+            </div>
 
             <div className='py-4 px-3'>
                 <table className="table table-striped table-bordered border shadow">

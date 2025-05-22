@@ -21,12 +21,45 @@ export default function Vendedor(){
         loadUsers()
     }
 
+    const [search, setSearch] = useState("");
+
+    const handleSearchChange = async (e) => {
+        const termo = e.target.value;
+        setSearch(termo);
+
+        if (termo.trim() === "") {
+            loadUsers(); // volta lista completa
+        } else {
+            try {
+                const res = await axios.get(`http://localhost:8080/vendedor/buscar?termo=${termo}`);
+                if (res.status === 204) {
+                    setUsers([]); // limpa lista se não encontrou ninguém
+                } else {
+                    setUsers(res.data);
+                }
+            } catch (error) {
+                console.error("Erro na busca:", error);
+            }
+        }
+    };
+
+
     return (
         <div className='conteiner'>
 
             <h1 className='text-center mt-4'>Vendedores</h1>
 
             <Link className="btn btn-success" to="/addVendedor">Adicionar</Link>
+
+            <div className="px-3">
+                <input
+                    type="text"
+                    className="form-control w-25"
+                    placeholder="Buscar por nome ou CPF"
+                    value={search}
+                    onChange={handleSearchChange}
+                />
+            </div>
 
             <div className='py-4 px-3'>
                 <table className="table table-striped table-bordered border shadow">

@@ -22,12 +22,45 @@ export default function Produtos() {
         loadProdutos()
     }
 
+    const [search, setSearch] = useState("");
+
+    const handleSearchChange = async (e) => {
+        const termo = e.target.value;
+        setSearch(termo);
+
+        if (termo.trim() === "") {
+            loadProdutos(); // volta lista completa
+        } else {
+            try {
+                const res = await axios.get(`http://localhost:8080/produtos/buscar?termo=${termo}`);
+                if (res.status === 204) {
+                    setProdutos([]); // limpa lista se não encontrou ninguém
+                } else {
+                    setProdutos(res.data);
+                }
+            } catch (error) {
+                console.error("Erro na busca:", error);
+            }
+        }
+    };
+
+    
     return (
         <div className='container'>
 
             <h1 className='text-center mt-4'>Produtos</h1>
 
             <Link className="btn btn-success" to="/addproduto">Adicionar</Link>
+
+            <div className="px-3">
+                <input
+                    type="text"
+                    className="form-control w-25"
+                    placeholder="Buscar por nome ou CPF"
+                    value={search}
+                    onChange={handleSearchChange}
+                />
+            </div>
 
             <div className='py-4 px-3'>
                 <table className="table table-striped table-bordered border shadow">
