@@ -18,7 +18,7 @@ export default function AddEstoqueProduto() {
 
   const carregarProdutos = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/produtos");
+      const result = await axios.get("http://localhost:8080/produtos2");
       setProdutos(result.data);
     } catch (error) {
       console.error("Erro ao carregar produtos:", error);
