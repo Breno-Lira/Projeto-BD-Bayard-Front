@@ -8,13 +8,13 @@ export default function AddRequisita() {
 
     const [requisita, setRequisita] = useState({
         codigoReq: "",
-        estoquista_cpf: "",
+        estoquistaCpf: "",
         codigoProduto: "", 
         fornecedorCnpj: "",
         qtdProduto: ""
     })
 
-    const {codigoReq , estoquista_cpf , codigoProduto, fornecedorCnpj, qtdProduto} = requisita
+    const {codigoReq , estoquistaCpf , codigoProduto, fornecedorCnpj, qtdProduto} = requisita
 
     const onInputChange = (e) => {
         setRequisita({ ...requisita, [e.target.name]: e.target.value })
@@ -78,8 +78,8 @@ export default function AddRequisita() {
                             <label className='form-label'>CPF do estoquista</label>
                             <select
                                 className='form-select'
-                                name='estoquista_cpf'
-                                value={requisita.estoquista_cpf}
+                                name='estoquistaCpf'
+                                value={requisita.estoquistaCpf}
                                 onChange={onInputChange}
                                 required
                             >

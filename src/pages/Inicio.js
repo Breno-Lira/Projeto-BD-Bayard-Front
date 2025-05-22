@@ -29,6 +29,16 @@ export default function Inicio() {
 
             <Link className="btn btn-success" to="/addcliente">Adicionar</Link>
 
+            <div className='px-3'>
+                <input
+                    type="text"
+                    className="form-control w-25"
+                    placeholder="Buscar por CPF"
+                    //value={search}
+                   // onChange={handleSearchChange}
+                />
+            </div>
+
             <div className='py-4 px-3'>
                 <table className="table table-striped table-bordered border shadow">
                     <thead>
