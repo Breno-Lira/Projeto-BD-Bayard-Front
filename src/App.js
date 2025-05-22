@@ -39,6 +39,12 @@ import Armazena from './pages/Armazena';
 import AddArmazena from './produtos/AddArmazena';
 import Requisita from './pages/Requisita';
 import AddRequisita from './produtos/AddRequisita';
+import VendaItens from './pages/VendaItens';
+import AddVendasItem from './vendas/AddVendasItem'
+import Repoe from './pages/Repoe';
+import AddRepoe from './repoe/AddRepoe'
+import DevolucaoCliente from './pages/DevolucaoCliente'
+import AddDevolucaoCliente from './cliente/AddDevolucaoCliente'
 
 function App() {
   return (
@@ -93,8 +99,19 @@ function App() {
 
           <Route exact path="/requisita" element={<Requisita />} />
           <Route exact path="/addRequisita" element={<AddRequisita />} />
+
+          <Route exact path="/vendasItens" element={<VendaItens />} />
+          <Route exact path="/addvendasitens" element={<AddVendasItem />} />
+
+          <Route exact path="/repoe" element={<Repoe />} />
+          <Route exact path="/addrepoe" element={<AddRepoe />} />
+
+          <Route exact path="/devolucaoCliente" element={<DevolucaoCliente />} />
+          <Route exact path="/adddevolucaoCliente" element={<AddDevolucaoCliente />} />
+
+
+
         </Routes>
-        
 
     </Router>
     
