@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -26,6 +26,21 @@ export default function AddRequisita() {
         navigate("/requisita");
     };
 
+    const [estoquista, setEstoquista] = useState([]);
+    const [produtos, setProdutos] = useState([]);
+    const [fornecedor, setFornecedor] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/estoquista")
+            .then(res => setEstoquista(res.data));
+
+        axios.get("http://localhost:8080/produtos2")
+            .then(res => setProdutos(res.data));
+
+        axios.get("http://localhost:8080/fornecedores")
+            .then(res => setFornecedor(res.data));
+    }, []);
+
     return (
         <div className='container'>
             <div className='row'>
@@ -34,27 +49,20 @@ export default function AddRequisita() {
 
                     <form onSubmit={onSubmit}>
                         <div className='mb-3'>
-                            <label htmlFor='codigoReq' className='form-label'>Codigo da Requisição</label>
-                            <input
-                                type="text"
-                                className='form-control'
-                                name='codigoReq'
-                                placeholder='Digite o Codigo da Requisição'
-                                value={codigoReq}
-                                onChange={onInputChange}
-                                required
-                            />
 
-                            <label htmlFor='codigoProduto' className='form-label mt-2'>Código do Produto</label>
-                            <input
-                                type="text"
-                                className='form-control'
+                            <label className='form-label'>Código do Produto</label>
+                            <select
+                                className='form-select'
                                 name='codigoProduto'
-                                placeholder='Digite o código do produto'
-                                value={codigoProduto}
+                                value={requisita.codigoProduto}
                                 onChange={onInputChange}
                                 required
-                            />
+                            >
+                                <option value="" disabled hidden>Selecione</option>
+                                {produtos.map(p => (
+                                    <option key={p.codigo} value={p.codigo}>{p.nome} - {p.codigo}</option>
+                                ))}
+                            </select>
 
                             <label htmlFor='qtdProduto' className='form-label mt-2'>Quantidade de Produtos</label>
                             <input
@@ -67,27 +75,33 @@ export default function AddRequisita() {
                                 required
                             />
 
-                            <label htmlFor='estoquista_cpf' className='form-label mt-2'>Cpf do Estoquista</label>
-                            <input
-                                type="text"
-                                className='form-control'
+                            <label className='form-label'>CPF do estoquista</label>
+                            <select
+                                className='form-select'
                                 name='estoquista_cpf'
-                                placeholder='Digite um Cpd o Estoquista'
-                                value={estoquista_cpf}
+                                value={requisita.estoquista_cpf}
                                 onChange={onInputChange}
                                 required
-                            />
+                            >
+                                <option value="" disabled hidden>Selecione</option>
+                                {estoquista.map(e => (
+                                    <option key={e.funcionario.cpf} value={e.funcionario.cpf}>{e.funcionario.nome} - {e.funcionario.cpf}</option>
+                                ))}
+                            </select>
 
-                            <label htmlFor='fornecedorCnpj' className='form-label mt-2'>Cnpj do Fornecedor</label>
-                            <input
-                                type="text"
-                                className='form-control'
+                            <label className='form-label'>CNPJ do fornecedor</label>
+                            <select
+                                className='form-select'
                                 name='fornecedorCnpj'
-                                placeholder='Digite o Cnpj do Fornecedor'
-                                value={fornecedorCnpj}
+                                value={requisita.fornecedorCnpj}
                                 onChange={onInputChange}
                                 required
-                            />
+                            >
+                                <option value="" disabled hidden>Selecione</option>
+                                {fornecedor.map(f => (
+                                    <option key={f.cnpj} value={f.cnpj}>{f.nome} - {f.cnpj}</option>
+                                ))}
+                            </select>
                         </div>
 
                         <Link to="/requisita" className='btn btn-outline-danger mx-4'>Cancelar</Link>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -40,6 +40,17 @@ export default function AddPagamentos() {
         await axios.post("http://localhost:8080/pagamento/add", pagamentosPayload);
         navigate("/pagamentos");
       };
+    
+    const [caixa, setCaixa] = useState([]);
+    const [venda, setVenda] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/caixa")
+            .then(res => setCaixa(res.data));
+
+        axios.get("http://localhost:8080/vendas")
+            .then(res => setVenda(res.data));
+    }, []);
 
     return (
         <div className='container'>
@@ -71,27 +82,34 @@ export default function AddPagamentos() {
                                 required
                             />
 
-                            <label htmlFor='caixa_cpf' className='form-label mt-2'>CPF do caixa</label>
-                            <input
-                                type="text"
-                                className='form-control'
+                            <label className='form-label'>Cpf do caixa</label>
+                            <select
+                                className='form-select'
                                 name='caixa_cpf'
-                                placeholder='Digite o cpf do caixa'
-                                value={caixa_cpf}
-                                onChange={(e) => onInputChange(e)}
+                                value={pagamentos.caixa_cpf}
+                                onChange={onInputChange}
                                 required
-                            />
+                            >
+                                <option value="" disabled hidden>Selecione</option>
+                                {caixa.map(c => (
+                                    <option key={c.funcionario.cpf} value={c.funcionario.cpf}>{c.funcionario.nome} - {c.funcionario.cpf}</option>
+                                ))}
+                            </select>
 
-                            <label htmlFor='idVenda' className='form-label mt-2'>ID da venda</label>
-                            <input
-                                type="text"
-                                className='form-control'
+                            <label className='form-label'>Id da Venda</label>
+                            <select
+                                className='form-select'
                                 name='idVenda'
-                                placeholder='Digite o ID da venda'
-                                value={idVenda}
-                                onChange={(e) => onInputChange(e)}
+                                value={pagamentos.idVenda}
+                                onChange={onInputChange}
                                 required
-                            />
+                            >
+                                <option value="" disabled hidden>Selecione</option>
+                                {venda.map(v => (
+                                    <option key={v.idVenda} value={v.idVenda}>Venda: {v.idVenda}</option>
+                                ))}
+                            </select>
+
                              <label htmlFor='valorTotal' className='form-label mt-2'>Valor total</label>
                             <input
                                 type="text"

@@ -11,7 +11,6 @@ export default function AddVenda() {
         dataVenda: "",
         valorSubtotal: "",
         fkVendedorCPF: "",
-        fkProdutoCodigo: "",
         fkClienteCPF: ""
     })
 
@@ -24,7 +23,7 @@ export default function AddVenda() {
         e.preventDefault()
         const vendaComData = {
             ...venda,
-            dataVenda: new Date().toISOString().split('T')[0] // yyyy-MM-dd
+            dataVenda: new Date().toISOString().split('T')[0] // yyyy-MM-ddx    
         }
         await axios.post("http://localhost:8080/vendas/add", vendaComData)
         navigate("/venda")
@@ -32,15 +31,11 @@ export default function AddVenda() {
 
 
     const [clientes, setClientes] = useState([]);
-    const [produtos, setProdutos] = useState([]);
     const [vendedores, setVendedores] = useState([]);
 
     useEffect(() => {
         axios.get("http://localhost:8080/clientes")
             .then(res => setClientes(res.data));
-
-        axios.get("http://localhost:8080/produtos2")
-            .then(res => setProdutos(res.data));
 
         axios.get("http://localhost:8080/vendedor")
             .then(res => setVendedores(res.data));
@@ -54,15 +49,6 @@ export default function AddVenda() {
 
                     <form onSubmit={onSubmit}>
                         <div className='mb-3'>
-                            <label className='form-label'>ID da Venda</label>
-                            <input
-                                type="text"
-                                className='form-control'
-                                name='idVenda'
-                                value={venda.idVenda}
-                                onChange={onInputChange}
-                                required
-                            />
 
                             <label className='form-label'>Valor Subtotal</label>
                             <input
@@ -87,20 +73,6 @@ export default function AddVenda() {
                                 {vendedores.map(v => (
                                     <option key={v.funcionario.cpf} value={v.funcionario.cpf}>
                                         {v.funcionario.nome} - {v.funcionario.cpf}</option>
-                                ))}
-                            </select>
-
-                            <label className='form-label'>Código do Produto</label>
-                            <select
-                                className='form-select'
-                                name='fkProdutoCodigo'
-                                value={venda.fkProdutoCodigo}
-                                onChange={onInputChange}
-                                required
-                            >
-                                <option value="" disabled hidden>Selecione</option>
-                                {produtos.map(p => (
-                                    <option key={p.codigo} value={p.codigo}>{p.nome} - {p.codigo}</option>
                                 ))}
                             </select>
 

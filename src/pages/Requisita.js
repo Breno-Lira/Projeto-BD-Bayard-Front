@@ -25,7 +25,7 @@ export default function Requisita() {
     return (
         <div className='container'>
 
-            <h1 className='text-center mt-4'>requisições</h1>
+            <h1 className='text-center mt-4'>Requisições</h1>
 
             <Link className="btn btn-success" to="/addrequisita">Adicionar</Link>
 

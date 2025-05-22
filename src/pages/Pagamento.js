@@ -24,7 +24,9 @@ export default function Pagamento() {
     return (
         <div className='container mt-4'>
             <h2 className='text-center mb-4'>Lista de Pagamentos</h2>
-            <Link className='btn btn-success' to="/addpagamentos">Adicionar</Link>
+            <div className="mb-4">
+                <Link className='btn btn-success' to="/addpagamentos">Adicionar</Link>
+            </div>
             <table className='table table-bordered'>
                 <thead>
                     <tr>

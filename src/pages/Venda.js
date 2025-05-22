@@ -24,8 +24,10 @@ export default function Venda() {
     return (
         <div className='container mt-4'>
             <h2 className='text-center mb-4'>Lista de Vendas</h2>
-            <Link className='btn btn-success me-2' to="/addvenda">Adicionar</Link>
-            <Link className="btn btn-success" to="/vendasItens" >Itens Venda</Link>
+            <div className="mb-4">
+                <Link className='btn btn-success me-2' to="/addvenda">Adicionar</Link>
+                <Link className="btn btn-success" to="/vendasItens" >Itens Venda</Link>
+            </div>
             <table className='table table-bordered'>
                 <thead>
                     <tr>
@@ -34,7 +36,6 @@ export default function Venda() {
                         <th>Subtotal</th>
                         <th>CPF Vendedor</th>
                         <th>CPF Cliente</th>
-                        <th>Código Produto</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -46,7 +47,6 @@ export default function Venda() {
                             <td>{venda.valorSubtotal}</td>
                             <td>{venda.fkVendedorCPF}</td>
                             <td>{venda.fkClienteCPF}</td>
-                            <td>{venda.fkProdutoCodigo}</td>
                             <td>
                                 
                                 <button onClick={() => deleteVenda(venda.idVenda)} className='btn btn-danger btn-sm'>Excluir</button>
