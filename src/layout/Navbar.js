@@ -9,10 +9,15 @@ export default function Navbar() {
         <div className="container-fluid">
           <a className="navbar-brand" href="/">BAYARD</a>
 
-
+          
+          <Link className="btn btn-outline-light" to="/armazena">Armazena</Link>
           <Link className="btn btn-outline-light" to="/cliente">Clientes</Link>
+          <Link className="btn btn-outline-light" to="/estoqueProduto">Estoque</Link>
           <Link className="btn btn-outline-light" to="/fornecedores">Fornecedores</Link>
+          <Link className="btn btn-outline-light" to="/pagamentos">Pagamento</Link>
+          <Link className="btn btn-outline-light" to="/requisita">Requisita</Link>
           <Link className="btn btn-outline-light" to="/venda">Venda</Link>
+
 
           <div class="dropdown">
             <button className="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

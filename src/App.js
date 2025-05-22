@@ -35,6 +35,10 @@ import EditPagamentos from './pagamentos/EditPagamentos';
 import EstoqueProduto from './pages/EstoqueProduto';
 import AddEstoqueProduto from './estoque_produto/AddEstoqueProduto';
 import EditEstoqueProduto from './estoque_produto/EditEstoqueProduto';
+import Armazena from './pages/Armazena';
+import AddArmazena from './produtos/AddArmazena';
+import Requisita from './pages/Requisita';
+import AddRequisita from './produtos/AddRequisita';
 
 function App() {
   return (
@@ -83,6 +87,12 @@ function App() {
           <Route exact path="/estoqueProduto" element={<EstoqueProduto />} />
           <Route exact path="/addestoqueProduto" element={<AddEstoqueProduto />} />
           <Route exact path="/editestoqueProduto/:id_estoque" element={<EditEstoqueProduto />} />
+
+          <Route exact path="/armazena" element={<Armazena />} />
+          <Route exact path="/addArmazena" element={<AddArmazena />} />
+
+          <Route exact path="/requisita" element={<Requisita />} />
+          <Route exact path="/addRequisita" element={<AddRequisita />} />
         </Routes>
         
 

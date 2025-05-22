@@ -90,7 +90,7 @@ export default function AddRequisita() {
                             />
                         </div>
 
-                        <Link to="/caixa" className='btn btn-outline-danger mx-4'>Cancelar</Link>
+                        <Link to="/requisita" className='btn btn-outline-danger mx-4'>Cancelar</Link>
                         <button type='submit' className='btn btn-outline-success'>Adicionar</button>
                     </form>
                 </div>
