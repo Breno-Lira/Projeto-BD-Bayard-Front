@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignal, faStore } from '@fortawesome/free-solid-svg-icons'
 import bayard from '../assets/bayard.png'
 import esporte1 from '../assets/imagemcorrida.jpg'
-import esporte2 from '../assets/imagemsenninho1.png'
+import esporte2 from '../assets/imagemsenna.png'
 
 export default function HomePage() {
   const [imagem, setImagem] = useState(null)
