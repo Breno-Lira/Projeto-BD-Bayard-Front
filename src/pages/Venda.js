@@ -93,8 +93,7 @@ export default function Venda() {
                                     <button onClick={() => deleteVenda(venda.idVenda)} className='btn btn-danger btn-sm'>Excluir</button>
                                 </td>
                             </tr>
-                        ))
-                    ) : (
+                        ))) : (
                         <tr>
                             <td colSpan="6" className="text-center">Nenhuma venda encontrada</td>
                         </tr>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-export default function Repoe(){
+export default function VendaItem(){
     const [VendaItem, setVendaItem] = useState([])
 
     useEffect(() => {
@@ -19,6 +19,29 @@ export default function Repoe(){
         loadVendaItem();
     }
 
+    const [search, setSearch] = useState("");
+
+    const handleSearchChange = async (e) => {
+        const idVenda = e.target.value;
+        setSearch(idVenda);
+
+        if (idVenda.trim() === "") {
+            loadVendaItem(); // volta lista completa
+        } else {
+            try {
+                const res = await axios.get(`http://localhost:8080/buscar-por-venda/${idVenda}`);
+                if (res.status === 204) {
+                    setVendaItem([]); // limpa lista se não encontrou ninguém
+                } else {
+                    setVendaItem(res.data);
+                }
+            } catch (error) {
+                console.error("Erro na busca:", error);
+            }
+        }
+    };
+
+
     return (
         <div className='conteiner'>
 
@@ -26,6 +49,16 @@ export default function Repoe(){
 
             <Link className="btn btn-success mb-2 me-2" to="/venda">Voltar</Link>
             <Link className="btn btn-success mb-2" to="/addvendasitens">Adicionar</Link>
+
+            <div className="px-3">
+                <input
+                    type="text"
+                    className="form-control w-25"
+                    placeholder="Buscar por Id da Venda"
+                    value={search}
+                    onChange={handleSearchChange}
+                />
+            </div>
 
             <div className='py-4 px-3'>
                 <table className="table table-striped table-bordered border shadow">
@@ -38,7 +71,8 @@ export default function Repoe(){
                         </tr>
                     </thead>
                     <tbody>
-                        {VendaItem.map((item, index) => (
+                        {VendaItem.length > 0 ? (
+                            VendaItem.map((item, index) => (
                             <tr key={index}>
                                 <td>{item.idVendaItem}</td>
                                 <td>{item.qtdVendaItem}</td>
@@ -48,7 +82,12 @@ export default function Repoe(){
                                     <button onClick={() => deleteVendaItem(item.idVendaItem)} className='btn btn-danger btn-sm'>Excluir</button>
                                 </td>
                             </tr>
-                        ))}
+                        ))) : (
+                        <tr>
+                            <td colSpan="6" className="text-center">Nenhuma venda encontrada</td>
+                        </tr>
+                        )}
+                        
                     </tbody>
                 </table>
             </div>
