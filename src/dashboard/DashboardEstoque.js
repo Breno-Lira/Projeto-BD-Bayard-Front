@@ -81,6 +81,11 @@ export default function DashboardEstoque() {
     }
   })
 
+  // Ordena produtos por quantidade (maior para menor) para ranking
+  const estoquePorProdutoOrdenado = [...estoquePorProduto].sort(
+    (a, b) => b.total - a.total
+  )
+
   // Conjuntos para verificação rápida de categoria
   const codigosCalcados = new Set(calcados.map((c) => c.produto.codigo))
   const codigosVestuario = new Set(vestuario.map((v) => v.produto.codigo))
@@ -163,6 +168,24 @@ export default function DashboardEstoque() {
       justifyContent: "center",
       alignItems: "center",
       width: "100%",
+      flexDirection: "column",
+    },
+    tabelaRanking: {
+      marginTop: 20,
+      width: "80%",
+      maxWidth: 700,
+      borderCollapse: "collapse",
+    },
+    th: {
+      borderBottom: "2px solid #ccc",
+      padding: "8px 12px",
+      textAlign: "left",
+      backgroundColor: "#f5f5f5",
+    },
+    td: {
+      borderBottom: "1px solid #ddd",
+      padding: "8px 12px",
+      color: "#333",
     },
   }
 
@@ -238,12 +261,12 @@ export default function DashboardEstoque() {
 
         {abaAtiva === "produto" && (
           <>
-            <h2 style={estilos.tituloGrafico}>Produtos por Nome</h2>
+            <h2 style={estilos.tituloGrafico}>Produtos por Nome (Ranking por Quantidade)</h2>
             <div style={estilos.graficoWrapper}>
               <LineChart
                 width={700}
                 height={350}
-                data={estoquePorProduto}
+                data={estoquePorProdutoOrdenado}
                 margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
@@ -260,6 +283,24 @@ export default function DashboardEstoque() {
                 <Legend />
                 <Line type="monotone" dataKey="total" stroke="#8884d8" strokeWidth={2} />
               </LineChart>
+
+              {/* Tabela de ranking */}
+              <table style={estilos.tabelaRanking}>
+                <thead>
+                  <tr>
+                    <th style={estilos.th}>Produto</th>
+                    <th style={estilos.th}>Quantidade</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {estoquePorProdutoOrdenado.map(({ produto, total }) => (
+                    <tr key={produto}>
+                      <td style={estilos.td}>{produto}</td>
+                      <td style={estilos.td}>{total}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </>
         )}
