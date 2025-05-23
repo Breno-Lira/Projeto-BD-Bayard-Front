@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 import {
   BarChart, Bar,
   LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-  PieChart, Pie, Cell
-} from 'recharts'
+  PieChart, Pie, Cell,
+} from "recharts"
 
 export default function DashboardEstoque() {
   const [estoqueProduto, setEstoqueProduto] = useState([])
   const [requisita, setRequisita] = useState([])
   const [produtos, setProdutos] = useState([])
   const [fornecedores, setFornecedores] = useState([])
+  const [calcados, setCalcados] = useState([])
+  const [vestuario, setVestuario] = useState([])
+  const [abaAtiva, setAbaAtiva] = useState("resumo")
 
   useEffect(() => {
     loadData()
@@ -19,30 +22,47 @@ export default function DashboardEstoque() {
 
   const loadData = async () => {
     try {
-      const [estoqueRes, requisitaRes, produtoRes, fornecedorRes] = await Promise.all([
+      const [
+        estoqueRes,
+        requisitaRes,
+        produtoRes,
+        fornecedorRes,
+        calcadosRes,
+        vestuarioRes,
+      ] = await Promise.all([
         axios.get("http://localhost:8080/estoque_produto"),
         axios.get("http://localhost:8080/requisita"),
         axios.get("http://localhost:8080/produtos"),
-        axios.get("http://localhost:8080/fornecedores")
+        axios.get("http://localhost:8080/fornecedores"),
+        axios.get("http://localhost:8080/calcados"),
+        axios.get("http://localhost:8080/vestuario"),
       ])
+
       setEstoqueProduto(estoqueRes.data)
       setRequisita(requisitaRes.data)
       setProdutos(produtoRes.data)
       setFornecedores(fornecedorRes.data)
+      setCalcados(calcadosRes.data)
+      setVestuario(vestuarioRes.data)
     } catch (err) {
       console.error("Erro ao carregar dados", err)
     }
   }
 
-  const totalEstoque = estoqueProduto.reduce((acc, item) => acc + item.quantidade_produtos, 0)
+  // Cálculo do total de produtos no estoque
+  const totalEstoque = estoqueProduto.reduce(
+    (acc, item) => acc + item.quantidade_produtos,
+    0
+  )
 
+  // Agrupa estoque por fornecedor
   const estoquePorFornecedor = estoqueProduto.reduce((acc, item) => {
-    const req = requisita.find(r => r.codigoProduto === item.codigo_produto)
+    const req = requisita.find((r) => r.codigoProduto === item.codigo_produto)
     const fornecedorCnpj = req ? req.fornecedorCnpj : null
-    const fornecedor = fornecedores.find(f => f.cnpj === fornecedorCnpj)
+    const fornecedor = fornecedores.find((f) => f.cnpj === fornecedorCnpj)
     const nomeFornecedor = fornecedor ? fornecedor.nome : "Desconhecido"
 
-    const existente = acc.find(entry => entry.fornecedor === nomeFornecedor)
+    const existente = acc.find((entry) => entry.fornecedor === nomeFornecedor)
     if (existente) {
       existente.total += item.quantidade_produtos
     } else {
@@ -51,84 +71,216 @@ export default function DashboardEstoque() {
     return acc
   }, [])
 
-  const estoquePorProduto = estoqueProduto.map(item => {
-    const produto = produtos.find(p => p.codigo === item.codigo_produto)
+  // Agrupa estoque por produto (nome)
+  const estoquePorProduto = estoqueProduto.map((item) => {
+    const produto = produtos.find((p) => p.codigo === item.codigo_produto)
     const nomeProduto = produto ? produto.nome : `Produto ${item.codigo_produto}`
     return {
       produto: nomeProduto,
-      total: item.quantidade_produtos
+      total: item.quantidade_produtos,
     }
   })
 
-  // Novo: Agrupar estoque por categoria/tipo do produto
-  const estoquePorCategoria = estoqueProduto.reduce((acc, item) => {
-    const produto = produtos.find(p => p.codigo === item.codigo_produto)
-    const categoria = produto ? produto.categoria || produto.tipo || "Diversos" : "Diversos" // ajuste conforme sua propriedade real
+  // Conjuntos para verificação rápida de categoria
+  const codigosCalcados = new Set(calcados.map((c) => c.produto.codigo))
+  const codigosVestuario = new Set(vestuario.map((v) => v.produto.codigo))
 
-    const existente = acc.find(entry => entry.categoria === categoria)
+  // Agrupa estoque por categoria (Calçados, Roupas, Outros)
+  const estoquePorCategoria = estoqueProduto.reduce((acc, item) => {
+    let categoria = "Outros"
+    if (codigosCalcados.has(item.codigo_produto)) categoria = "Calçados"
+    else if (codigosVestuario.has(item.codigo_produto)) categoria = "Roupas"
+
+    const existente = acc.find((entry) => entry.categoria === categoria)
     if (existente) {
       existente.total += item.quantidade_produtos
     } else {
-      acc.push({ categoria: categoria, total: item.quantidade_produtos })
+      acc.push({ categoria, total: item.quantidade_produtos })
     }
     return acc
   }, [])
 
-  const cores = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA336A', '#33AA99']
+  const cores = [
+    "#0088FE",
+    "#00C49F",
+    "#FFBB28",
+    "#FF8042",
+    "#AA336A",
+    "#33AA99",
+  ]
+
+  const estilos = {
+    container: {
+      display: "flex",
+      height: "100vh",
+      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+      backgroundColor: "#f0f2f5",
+    },
+    sidebar: {
+      width: 220,
+      backgroundColor: "#fff",
+      borderRight: "1px solid #ddd",
+      paddingTop: 20,
+      boxShadow: "2px 0 5px rgb(0 0 0 / 0.1)",
+    },
+    link: {
+      display: "block",
+      padding: "15px 20px",
+      cursor: "pointer",
+      color: "#555",
+      textDecoration: "none",
+      fontWeight: "600",
+      borderLeft: "4px solid transparent",
+      transition: "all 0.3s",
+      userSelect: "none",
+    },
+    linkAtivo: {
+      backgroundColor: "#e6f7ff",
+      color: "#1890ff",
+      borderLeft: "4px solid #1890ff",
+    },
+    conteudo: {
+      flexGrow: 1,
+      padding: 30,
+      overflowY: "auto",
+    },
+    tituloGrafico: {
+      fontSize: "1.8rem",
+      marginBottom: 25,
+      color: "#333",
+    },
+    resumoItem: {
+      backgroundColor: "#fff",
+      padding: 20,
+      borderRadius: 8,
+      boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
+      marginBottom: 20,
+      fontSize: "1.2rem",
+      color: "#333",
+    },
+  }
 
   return (
-    <div className="container mt-4">
-      <h2 className="text-center mb-4">Dashboard de Estoque Produto</h2>
+    <div style={estilos.container}>
+      <nav style={estilos.sidebar}>
+        <a
+          style={abaAtiva === "resumo" ? { ...estilos.link, ...estilos.linkAtivo } : estilos.link}
+          onClick={() => setAbaAtiva("resumo")}
+        >
+          Resumo
+        </a>
+        <a
+          style={abaAtiva === "fornecedor" ? { ...estilos.link, ...estilos.linkAtivo } : estilos.link}
+          onClick={() => setAbaAtiva("fornecedor")}
+        >
+          Produtos por Fornecedor
+        </a>
+        <a
+          style={abaAtiva === "produto" ? { ...estilos.link, ...estilos.linkAtivo } : estilos.link}
+          onClick={() => setAbaAtiva("produto")}
+        >
+          Produtos por Nome
+        </a>
+        <a
+          style={abaAtiva === "categoria" ? { ...estilos.link, ...estilos.linkAtivo } : estilos.link}
+          onClick={() => setAbaAtiva("categoria")}
+        >
+          Estoque por Categoria
+        </a>
+      </nav>
 
-      <div className="mb-4">
-        <h4>Total de produtos no estoque: {totalEstoque}</h4>
-        <h4>Quantidade de registros: {estoqueProduto.length}</h4>
-      </div>
+      <main style={estilos.conteudo}>
+        {abaAtiva === "resumo" && (
+          <>
+            <h2 style={estilos.tituloGrafico}>Resumo do Estoque</h2>
+            <div style={estilos.resumoItem}>
+              Total de produtos no estoque: <strong>{totalEstoque}</strong>
+            </div>
+            <div style={estilos.resumoItem}>
+              Quantidade de registros no estoque: <strong>{estoqueProduto.length}</strong>
+            </div>
+          </>
+        )}
 
-      <div className="mt-5">
-        <h5>Gráfico: Produtos por Fornecedor</h5>
-        <BarChart width={600} height={300} data={estoquePorFornecedor}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="fornecedor" angle={-45} textAnchor="end" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="total" fill="#82ca9d" />
-        </BarChart>
-      </div>
+        {abaAtiva === "fornecedor" && (
+          <>
+            <h2 style={estilos.tituloGrafico}>Produtos por Fornecedor</h2>
+            <BarChart
+              width={700}
+              height={350}
+              data={estoquePorFornecedor}
+              margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="fornecedor"
+                angle={-45}
+                textAnchor="end"
+                interval={0}
+                height={70}
+                tick={{ fontSize: 12, fill: "#666" }}
+              />
+              <YAxis tick={{ fontSize: 12, fill: "#666" }} />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="total" fill="#82ca9d" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </>
+        )}
 
-      <div className="mt-5">
-        <h5>Gráfico: Produtos por Nome</h5>
-        <LineChart width={600} height={300} data={estoquePorProduto}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="produto" angle={-45} textAnchor="end" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="total" stroke="#8884d8" />
-        </LineChart>
-      </div>
+        {abaAtiva === "produto" && (
+          <>
+            <h2 style={estilos.tituloGrafico}>Produtos por Nome</h2>
+            <LineChart
+              width={700}
+              height={350}
+              data={estoquePorProduto}
+              margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="produto"
+                angle={-45}
+                textAnchor="end"
+                interval={0}
+                height={70}
+                tick={{ fontSize: 12, fill: "#666" }}
+              />
+              <YAxis tick={{ fontSize: 12, fill: "#666" }} />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="total" stroke="#8884d8" strokeWidth={2} />
+            </LineChart>
+          </>
+        )}
 
-      <div className="mt-5">
-        <h5>Gráfico: Estoque por Categoria de Produto</h5>
-        <PieChart width={400} height={400}>
-          <Pie
-            data={estoquePorCategoria}
-            dataKey="total"
-            nameKey="categoria"
-            cx="50%"
-            cy="50%"
-            outerRadius={150}
-            label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-          >
-            {estoquePorCategoria.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={cores[index % cores.length]} />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend />
-        </PieChart>
-      </div>
+        {abaAtiva === "categoria" && (
+          <>
+            <h2 style={estilos.tituloGrafico}>Estoque por Categoria de Produto</h2>
+            <PieChart width={450} height={450}>
+              <Pie
+                data={estoquePorCategoria}
+                dataKey="total"
+                nameKey="categoria"
+                cx="50%"
+                cy="50%"
+                outerRadius={150}
+                label={({ name, percent }) =>
+                  `${name}: ${(percent * 100).toFixed(0)}%`
+                }
+                labelLine={false}
+                fill="#8884d8"
+              >
+                {estoquePorCategoria.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={cores[index % cores.length]} />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend verticalAlign="bottom" height={36} />
+            </PieChart>
+          </>
+        )}
+      </main>
     </div>
   )
 }
