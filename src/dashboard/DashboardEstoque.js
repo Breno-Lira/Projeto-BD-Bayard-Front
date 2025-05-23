@@ -158,6 +158,12 @@ export default function DashboardEstoque() {
       fontSize: "1.2rem",
       color: "#333",
     },
+    graficoWrapper: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+    },
   }
 
   return (
@@ -205,79 +211,85 @@ export default function DashboardEstoque() {
         {abaAtiva === "fornecedor" && (
           <>
             <h2 style={estilos.tituloGrafico}>Produtos por Fornecedor</h2>
-            <BarChart
-              width={700}
-              height={350}
-              data={estoquePorFornecedor}
-              margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="fornecedor"
-                angle={-45}
-                textAnchor="end"
-                interval={0}
-                height={70}
-                tick={{ fontSize: 12, fill: "#666" }}
-              />
-              <YAxis tick={{ fontSize: 12, fill: "#666" }} />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="total" fill="#82ca9d" radius={[4, 4, 0, 0]} />
-            </BarChart>
+            <div style={estilos.graficoWrapper}>
+              <BarChart
+                width={700}
+                height={350}
+                data={estoquePorFornecedor}
+                margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey="fornecedor"
+                  angle={-45}
+                  textAnchor="end"
+                  interval={0}
+                  height={70}
+                  tick={{ fontSize: 12, fill: "#666" }}
+                />
+                <YAxis tick={{ fontSize: 12, fill: "#666" }} />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="total" fill="#82ca9d" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </div>
           </>
         )}
 
         {abaAtiva === "produto" && (
           <>
             <h2 style={estilos.tituloGrafico}>Produtos por Nome</h2>
-            <LineChart
-              width={700}
-              height={350}
-              data={estoquePorProduto}
-              margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="produto"
-                angle={-45}
-                textAnchor="end"
-                interval={0}
-                height={70}
-                tick={{ fontSize: 12, fill: "#666" }}
-              />
-              <YAxis tick={{ fontSize: 12, fill: "#666" }} />
-              <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="total" stroke="#8884d8" strokeWidth={2} />
-            </LineChart>
+            <div style={estilos.graficoWrapper}>
+              <LineChart
+                width={700}
+                height={350}
+                data={estoquePorProduto}
+                margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey="produto"
+                  angle={-45}
+                  textAnchor="end"
+                  interval={0}
+                  height={70}
+                  tick={{ fontSize: 12, fill: "#666" }}
+                />
+                <YAxis tick={{ fontSize: 12, fill: "#666" }} />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="total" stroke="#8884d8" strokeWidth={2} />
+              </LineChart>
+            </div>
           </>
         )}
 
         {abaAtiva === "categoria" && (
           <>
             <h2 style={estilos.tituloGrafico}>Estoque por Categoria de Produto</h2>
-            <PieChart width={450} height={450}>
-              <Pie
-                data={estoquePorCategoria}
-                dataKey="total"
-                nameKey="categoria"
-                cx="50%"
-                cy="50%"
-                outerRadius={150}
-                label={({ name, percent }) =>
-                  `${name}: ${(percent * 100).toFixed(0)}%`
-                }
-                labelLine={false}
-                fill="#8884d8"
-              >
-                {estoquePorCategoria.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={cores[index % cores.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend verticalAlign="bottom" height={36} />
-            </PieChart>
+            <div style={estilos.graficoWrapper}>
+              <PieChart width={450} height={450}>
+                <Pie
+                  data={estoquePorCategoria}
+                  dataKey="total"
+                  nameKey="categoria"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={150}
+                  label={({ name, percent }) =>
+                    `${name}: ${(percent * 100).toFixed(0)}%`
+                  }
+                  labelLine={false}
+                  fill="#8884d8"
+                >
+                  {estoquePorCategoria.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={cores[index % cores.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend verticalAlign="bottom" height={36} />
+              </PieChart>
+            </div>
           </>
         )}
       </main>

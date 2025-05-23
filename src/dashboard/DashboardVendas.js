@@ -9,11 +9,15 @@ import {
 export default function Dashboard() {
   const [vendas, setVendas] = useState([])
   const [vendedores, setVendedores] = useState([])
+  const [itemvenda, setVendaItem] = useState([])
   const [abaAtiva, setAbaAtiva] = useState('resumo')
+  const [produtos, setProdutos] = useState([])
 
   useEffect(() => {
     loadVendas()
     loadVendedores()
+    loadVendaItem()
+    loadProdutos()
   }, [])
 
   const loadVendas = async () => {
@@ -34,9 +38,29 @@ export default function Dashboard() {
     }
   }
 
+  const loadVendaItem = async () => {
+    try {
+      const result = await axios.get("http://localhost:8080/vendasItens")
+      setVendaItem(result.data)
+    } catch (err) {
+      console.error("Erro ao carregar itens de venda", err)
+    }
+  }
+
+  const loadProdutos = async () => {
+    try {
+      const result = await axios.get("http://localhost:8080/produtos2")
+      setProdutos(result.data)
+    } catch (err) {
+      console.error("Erro ao carregar produtos", err)
+    }
+  }
+
   // Cálculos
   const totalVendas = vendas.reduce((acc, v) => acc + v.valorSubtotal, 0)
   const quantidadeVendas = vendas.length
+  const quantidadeTotalProdutos = itemvenda.reduce((acc, item) => acc + item.qtdVendaItem, 0)
+  const ticketMedio = quantidadeTotalProdutos > 0 ? totalVendas / quantidadeTotalProdutos : 0
 
   const vendasPorData = vendas.reduce((acc, venda) => {
     const data = venda.dataVenda
@@ -59,16 +83,27 @@ export default function Dashboard() {
     const vendedorCpf = venda.fkVendedorCPF
     const vendedorObj = vendedores.find(v => v.funcionario.cpf === vendedorCpf)
     const nomeVendedor = vendedorObj ? vendedorObj.funcionario.nome : vendedorCpf
-
     const existente = acc.find(item => item.vendedor === nomeVendedor)
     if (existente) existente.total += venda.valorSubtotal
     else acc.push({ vendedor: nomeVendedor, total: venda.valorSubtotal })
     return acc
   }, [])
 
+  const topProdutosMaisVendidos = itemvenda.reduce((acc, item) => {
+    const produtoObj = produtos.find(p => p.codigo === item.codigo_produto)
+    if (produtoObj) {
+      const existente = acc.find(p => p.nome === produtoObj.nome)
+      if (existente) {
+        existente.quantidade += item.qtdVendaItem
+      } else {
+        acc.push({ nome: produtoObj.nome, quantidade: item.qtdVendaItem })
+      }
+    }
+    return acc
+  }, []).sort((a, b) => b.quantidade - a.quantidade).slice(0, 10)
+
   const cores = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#8dd1e1', '#d0ed57']
 
-  // Estilos simples para barra lateral e conteúdo
   const estilos = {
     container: {
       display: 'flex',
@@ -102,12 +137,19 @@ export default function Dashboard() {
     conteudo: {
       flexGrow: 1,
       padding: 30,
+
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+
       overflowY: 'auto',
     },
     titulo: {
       fontSize: '1.8rem',
       marginBottom: 25,
       color: '#333',
+      alignSelf: 'flex-start',
     },
     resumoItem: {
       backgroundColor: '#fff',
@@ -118,6 +160,7 @@ export default function Dashboard() {
       fontSize: '1.2rem',
       color: '#333',
       maxWidth: 400,
+      width: '100%',
     },
   }
 
@@ -148,6 +191,12 @@ export default function Dashboard() {
         >
           Vendas por Vendedor
         </a>
+        <a
+          style={abaAtiva === 'produtos' ? { ...estilos.link, ...estilos.linkAtivo } : estilos.link}
+          onClick={() => setAbaAtiva('produtos')}
+        >
+          Top 10 Produtos
+        </a>
       </nav>
 
       <main style={estilos.conteudo}>
@@ -160,13 +209,22 @@ export default function Dashboard() {
             <div style={estilos.resumoItem}>
               Quantidade de vendas: <strong>{quantidadeVendas}</strong>
             </div>
+            <div style={estilos.resumoItem}>
+              Ticket médio por produto: <strong>R$ {ticketMedio.toFixed(2)}</strong>
+            </div>
           </>
         )}
 
         {abaAtiva === 'data' && (
           <>
             <h2 style={estilos.titulo}>Vendas por Data</h2>
-            <LineChart width={700} height={350} data={vendasPorData} margin={{ bottom: 80 }}>
+            <LineChart
+              width={700}
+              height={350}
+              data={vendasPorData}
+              margin={{ bottom: 80 }}
+              style={{ maxWidth: '700px', width: '100%', margin: '0 auto' }}
+            >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="data" angle={-45} textAnchor="end" interval={0} height={70} />
               <YAxis />
@@ -180,7 +238,13 @@ export default function Dashboard() {
         {abaAtiva === 'mes' && (
           <>
             <h2 style={estilos.titulo}>Vendas por Mês</h2>
-            <BarChart width={700} height={350} data={vendasPorMes} margin={{ bottom: 80 }}>
+            <BarChart
+              width={700}
+              height={350}
+              data={vendasPorMes}
+              margin={{ bottom: 80 }}
+              style={{ maxWidth: '700px', width: '100%', margin: '0 auto' }}
+            >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="mes" angle={-45} textAnchor="end" interval={0} height={70} />
               <YAxis />
@@ -194,7 +258,11 @@ export default function Dashboard() {
         {abaAtiva === 'vendedor' && (
           <>
             <h2 style={estilos.titulo}>Vendas por Vendedor</h2>
-            <PieChart width={450} height={450}>
+            <PieChart
+              width={450}
+              height={450}
+              style={{ maxWidth: '450px', width: '100%', margin: '0 auto' }}
+            >
               <Pie
                 data={vendasPorVendedor}
                 dataKey="total"
@@ -212,6 +280,17 @@ export default function Dashboard() {
               <Tooltip />
               <Legend verticalAlign="bottom" height={36} />
             </PieChart>
+          </>
+        )}
+
+        {abaAtiva === 'produtos' && (
+          <>
+            <h2 style={estilos.titulo}>Top 10 Produtos Mais Vendidos</h2>
+            {topProdutosMaisVendidos.map((produto, index) => (
+              <div key={index} style={estilos.resumoItem}>
+                {index + 1}. {produto.nome} — {produto.quantidade} vendidos
+              </div>
+            ))}
           </>
         )}
       </main>
