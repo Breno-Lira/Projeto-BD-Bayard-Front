@@ -47,8 +47,8 @@ export default function Pagamento() {
                             <td>{pagamento.nota_fiscal}</td>
                             <td>{pagamento.caixa_cpf}</td>
                             <td>{pagamento.idVenda}</td>
-                            <td>{pagamento.valorTotal}</td>
-                            <td>{pagamento.desconto}</td>
+                            <td>R$ {pagamento.valorTotal}</td>
+                            <td>R$ {pagamento.desconto}</td>
                             <td>    
                                 <Link
                                     className='btn btn-outline-primary mx-2'

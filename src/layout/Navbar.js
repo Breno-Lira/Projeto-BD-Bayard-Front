@@ -11,9 +11,37 @@ export default function Navbar() {
 
           
           <Link className="btn btn-outline-light" to="/armazena">Armazena</Link>
-          <Link className="btn btn-outline-light" to="/cliente">Clientes</Link>
-          <Link className="btn btn-outline-light" to="/estoqueProduto">Estoque</Link>
-          <Link className="btn btn-outline-light" to="/fornecedores">Fornecedores</Link>
+
+          <div class="dropdown">
+            <button className="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Clientes
+            </button>
+            <ul className="dropdown-menu">
+              <Link className="dropdown-item" to="/cliente">Clientes</Link>
+              <Link className="dropdown-item" to="/devolucaoCliente">Devolucao</Link>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <button className="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Estoque
+            </button>
+            <ul className="dropdown-menu">
+              <Link className="dropdown-item" to="/estoqueProduto">Estoque</Link>
+              <Link className="dropdown-item" to="/repoe">Repor</Link>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <button className="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Fornecedores
+            </button>
+            <ul className="dropdown-menu">
+              <Link className="dropdown-item" to="/fornecedores">Fornecedores</Link>
+              <Link className="dropdown-item" to="/devolucaoFornecedor">Devolucao</Link>
+            </ul>
+          </div>
+
           <Link className="btn btn-outline-light" to="/pagamentos">Pagamento</Link>
           <Link className="btn btn-outline-light" to="/requisita">Requisita</Link>
           <Link className="btn btn-outline-light" to="/venda">Venda</Link>

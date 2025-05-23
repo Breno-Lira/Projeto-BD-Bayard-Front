@@ -86,7 +86,7 @@ export default function Venda() {
                             <tr key={index}>
                                 <td>{venda.idVenda}</td>
                                 <td>{venda.dataVenda}</td>
-                                <td>{venda.valorSubtotal}</td>
+                                <td>R$ {venda.valorSubtotal}</td>
                                 <td>{venda.fkVendedorCPF}</td>
                                 <td>{venda.fkClienteCPF}</td>
                                 <td>

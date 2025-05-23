@@ -49,7 +49,7 @@ export default function AddVenda() {
 
                     <form onSubmit={onSubmit}>
                         <div className='mb-3'>
-
+                            {/*
                             <label className='form-label'>Valor Subtotal</label>
                             <input
                                 type="number"
@@ -59,7 +59,7 @@ export default function AddVenda() {
                                 value={venda.valorSubtotal}
                                 onChange={onInputChange}
                                 required
-                            />
+                            /> */}
 
                             <label className='form-label'>CPF do Vendedor</label>
                             <select

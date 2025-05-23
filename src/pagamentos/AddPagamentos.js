@@ -109,7 +109,7 @@ export default function AddPagamentos() {
                                     <option key={v.idVenda} value={v.idVenda}>Venda: {v.idVenda}</option>
                                 ))}
                             </select>
-
+                            {/*
                              <label htmlFor='valorTotal' className='form-label mt-2'>Valor total</label>
                             <input
                                 type="text"
@@ -119,7 +119,7 @@ export default function AddPagamentos() {
                                 value={valorTotal}
                                 onChange={(e) => onInputChange(e)}
                                 required
-                            />
+                            /> */}
 
                             <label htmlFor='desconto' className='form-label mt-2'>Desconto</label>
                             <input

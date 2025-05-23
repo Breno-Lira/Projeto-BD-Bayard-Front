@@ -92,7 +92,7 @@ export default function Dashboard() {
   const topProdutosMaisVendidos = itemvenda.reduce((acc, item) => {
     const produtoObj = produtos.find(p => p.codigo === item.codigo_produto)
     if (produtoObj) {
-      const existente = acc.find(p => p.nome === produtoObj.nome)
+      const existente = acc.find(p => p.codigo === produtoObj.codigo)
       if (existente) {
         existente.quantidade += item.qtdVendaItem
       } else {
