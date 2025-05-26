@@ -26,8 +26,13 @@ export default function AddVenda() {
             idVenda: vendaItem.idVenda
         };
 
-        await axios.post("http://localhost:8080/vendaItem/add", payload);
-        navigate("/vendasItens");
+        try {
+            await axios.post("http://localhost:8080/vendaItem/add", payload);
+            navigate("/vendasItens");
+        } catch (error) {
+            console.error("Erro ao adicionar item da venda:", error);
+            alert(error.response?.data?.message || "Erro desconhecido ao adicionar item da venda.");
+        }
     };
 
 

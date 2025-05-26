@@ -10,14 +10,26 @@ export default function VendaItem(){
     }, [])
 
     const loadVendaItem = async () => {
-        const result = await axios.get("http://localhost:8080/vendasItens")
-        setVendaItem(result.data)
-    }
+        try {
+            const result = await axios.get("http://localhost:8080/vendasItens");
+            setVendaItem(result.data);
+        } catch (error) {
+            console.error("Erro ao carregar itens da venda:", error);
+            alert("Erro ao carregar itens da venda.");
+        }
+    };
 
-    const deleteVendaItem = async (id) => {
-        await axios.delete(`http://localhost:8080/vendaItem/delete/${id}`);
-        loadVendaItem();
-    }
+
+   const deleteVendaItem = async (id) => {
+        try {
+            await axios.delete(`http://localhost:8080/vendaItem/delete/${id}`);
+            loadVendaItem();
+        } catch (error) {
+            console.error("Erro ao excluir item da venda:", error);
+            alert(error.response?.data || "Erro ao excluir item.");
+        }
+    };
+
 
     const [search, setSearch] = useState("");
 
