@@ -22,12 +22,69 @@ export default function Requisita() {
         loadRequisita()
     }
 
+    const [estoquistaCpf, setEstoquistaCpf] = useState("");
+    const [codigoProduto, setCodigoProduto] = useState("");
+    const [fornecedorCnpj, setFornecedorCnpj] = useState("");
+
+    useEffect(() => {
+        buscarRequisicoesFiltradas();
+    }, [estoquistaCpf, codigoProduto, fornecedorCnpj]);
+
+    const buscarRequisicoesFiltradas = async () => {
+        try {
+            const params = new URLSearchParams();
+            if (estoquistaCpf.trim() !== "") params.append("estoquistaCpf", estoquistaCpf);
+            if (codigoProduto.trim() !== "") params.append("codigoProduto", codigoProduto);
+            if (fornecedorCnpj.trim() !== "") params.append("fornecedorCnpj", fornecedorCnpj);
+
+            const result = await axios.get(`http://localhost:8080/requisita/buscar?${params.toString()}`);
+            setRequisita(result.data);
+        } catch (error) {
+            console.error("Erro ao buscar requisições:", error);
+        }
+    };
+
+
     return (
         <div className='container'>
 
             <h1 className='text-center mt-4'>Requisições</h1>
 
             <Link className="btn btn-success" to="/addrequisita">Adicionar</Link>
+
+            {/* Filtros */}
+            <div className="row mb-3">
+                <div className="col-md-4">
+                    <label>CPF do Estoquista:</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={estoquistaCpf}
+                        onChange={(e) => setEstoquistaCpf(e.target.value)}
+                        placeholder="Digite o CPF do estoquista"
+                    />
+                </div>
+                <div className="col-md-4">
+                    <label>Código do Produto:</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={codigoProduto}
+                        onChange={(e) => setCodigoProduto(e.target.value)}
+                        placeholder="Digite o código do produto"
+                    />
+                </div>
+                <div className="col-md-4">
+                    <label>CNPJ do Fornecedor:</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={fornecedorCnpj}
+                        onChange={(e) => setFornecedorCnpj(e.target.value)}
+                        placeholder="Digite o CNPJ do fornecedor"
+                    />
+                </div>
+            </div>
 
             <div className='py-4 px-3'>
                 <table className="table table-striped table-bordered border shadow">
@@ -41,26 +98,29 @@ export default function Requisita() {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            requisita.map((requisita, index) => (
+                        {requisita.length > 0 ? (
+                            requisita.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{requisita.codigoReq}</td>
-                                    <td>{requisita.estoquistaCpf}</td>
-                                    <td>{requisita.codigoProduto}</td>
-                                    <td>{requisita.fornecedorCnpj}</td>
-                                    <td>{requisita.qtdProduto}</td>
+                                    <td>{item.codigoReq}</td>
+                                    <td>{item.estoquistaCpf}</td>
+                                    <td>{item.codigoProduto}</td>
+                                    <td>{item.fornecedorCnpj}</td>
+                                    <td>{item.qtdProduto}</td>
                                     <td>
-                                        
                                         <button
                                             className='btn btn-danger mx-2'
-                                            onClick={() => deleteRequisita(requisita.codigoReq)}
+                                            onClick={() => deleteRequisita(item.codigoReq)}
                                         >
                                             Delete
                                         </button>
                                     </td>
                                 </tr>
                             ))
-                        }
+                        ) : (
+                            <tr>
+                                <td colSpan="6" className="text-center">Nenhuma requisição encontrada</td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
