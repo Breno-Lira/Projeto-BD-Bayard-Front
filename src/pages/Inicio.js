@@ -101,14 +101,12 @@ export default function Inicio() {
                                             to={`/editcliente/${user.cpf}`}
                                         >Editar</Link>
 
-
-                                        <button
+                                        {/* <button
                                             className='btn btn-danger mx-2'
                                             onClick={() => deleteUser(user.cpf)}
 
                                         >
-                                            Delete</button>
-
+                                            Delete</button> */}
                                     </td>
                                 </tr>
                             ))

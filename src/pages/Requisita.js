@@ -95,6 +95,7 @@ export default function Requisita() {
                             <th scope="col">Codigo do Produto</th>
                             <th scope="col">Cnpj do Fornecedor</th>
                             <th scope="col">Quantidade de Produtos</th>
+                            <th scope="col">Ação</th>
                         </tr>
                     </thead>
                     <tbody>

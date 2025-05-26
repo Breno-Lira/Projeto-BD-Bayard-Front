@@ -69,7 +69,7 @@ export default function EstoqueProduto() {
                             <th scope="col">ID</th>
                             <th scope="col">Código Produto</th>
                             <th scope="col">Quantidade de Produtos</th>
-                            <th scope="col">Ações</th>
+                            <th scope="col">Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,12 +85,12 @@ export default function EstoqueProduto() {
                                     >
                                         Editar
                                     </Link>
-                                    <button
+                                    {/* <button
                                         onClick={() => deleteEstoqueProduto(estoque_produto.id_estoque)}
                                         className='btn btn-danger'
                                     >
                                         Excluir
-                                    </button>
+                                    </button> */}
                                 </td>
                             </tr>
                         ))}

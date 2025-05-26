@@ -82,6 +82,7 @@ export default function Estoquista() {
                             <th scope="col">ativo</th>
                             <th scope="col">dataUltimoInventario</th>
                             <th scope="col">acessoEstoque</th>
+                            <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>

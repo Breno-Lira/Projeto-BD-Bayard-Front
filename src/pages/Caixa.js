@@ -83,6 +83,7 @@ export default function Caixa(){
                             <th scope="col">ativo</th>
                             <th scope="col">Login</th>
                             <th scope="col">Senha</th>
+                            <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>

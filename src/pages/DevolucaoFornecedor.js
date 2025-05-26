@@ -99,6 +99,7 @@ export default function DevolucaoFornecedor() {
                             <th scope="col">Código do Produto</th>
                             <th scope="col">Data da Devolução</th>
                             <th scope="col">Quantidade de Produtos</th>
+                            <th scope="col">Ação</th>
                         </tr>
                     </thead>
                     <tbody>

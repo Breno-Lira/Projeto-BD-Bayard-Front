@@ -77,7 +77,7 @@ export default function Venda() {
                         <th>Subtotal</th>
                         <th>CPF Vendedor</th>
                         <th>CPF Cliente</th>
-                        <th>Ações</th>
+                        {/* <th>Ações</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -89,9 +89,9 @@ export default function Venda() {
                                 <td>R$ {venda.valorSubtotal}</td>
                                 <td>{venda.fkVendedorCPF}</td>
                                 <td>{venda.fkClienteCPF}</td>
-                                <td>
+                                {/* <td>
                                     <button onClick={() => deleteVenda(venda.idVenda)} className='btn btn-danger btn-sm'>Excluir</button>
-                                </td>
+                                </td> */}
                             </tr>
                         ))) : (
                         <tr>

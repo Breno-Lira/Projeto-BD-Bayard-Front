@@ -69,6 +69,7 @@ export default function Fornecedores() {
                             <th scope="col">Cnpj</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Transportadora</th>
+                            <th scope="col">Ação</th>
 
                         </tr>
                     </thead>
@@ -86,12 +87,12 @@ export default function Fornecedores() {
                                         >Editar</Link>
 
 
-                                        <button
+                                        {/* <button
                                             className='btn btn-danger mx-2'
                                             onClick={() => deleteUser(user.cnpj)}
 
                                         >
-                                            Delete</button>
+                                            Delete</button> */}
 
                                     </td>
                                 </tr>

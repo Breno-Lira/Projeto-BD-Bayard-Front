@@ -72,7 +72,7 @@ export default function Produtos() {
                             <th scope="col">Cor2</th>
                             <th scope="col">Preço</th>
                             <th scope="col">QtdProduto</th>
-                            <th scope="col">Ações</th>
+                            <th scope="col">Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,12 +93,12 @@ export default function Produtos() {
                                             Editar
                                         </Link>
 
-                                        <button
+                                        {/* <button
                                             className='btn btn-danger mx-2'
                                             onClick={() => deleteProduto(produto.codigo)}
                                         >
                                             Delete
-                                        </button>
+                                        </button> */}
                                     </td>
                                 </tr>
                             ))

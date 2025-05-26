@@ -111,6 +111,7 @@ export default function Armazena() {
                             <th scope="col">Codigo do Produto</th>
                             <th scope="col">Quantidade</th>
                             <th scope="col">id</th>
+                            <th scope="col">Ação</th>
                         </tr>
                     </thead>
                     <tbody>

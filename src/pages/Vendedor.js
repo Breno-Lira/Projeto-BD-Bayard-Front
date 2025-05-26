@@ -81,6 +81,7 @@ export default function Vendedor(){
                             <th scope="col">chefia</th>
                             <th scope="col">ativo</th>
                             <th scope="col">numVenda</th>
+                            <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>

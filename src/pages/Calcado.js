@@ -70,7 +70,7 @@ export default function Calcados() {
                         <th>Gênero</th>
                         <th>Tamanho</th>
                         <th>Faixa Etária</th>
-                        <th>Ações</th>
+                        <th>Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,7 +88,7 @@ export default function Calcados() {
                                 <td>{calcado.faixaEtaria}</td>
                                 <td>
                                     <Link to={`/editcalcado/${calcado.produto.codigo}`} className='btn btn-outline-primary mx-2'>Editar</Link>
-                                    <button onClick={() => deleteCalcado(calcado.produto.codigo)} className='btn btn-danger'>Excluir</button>
+                                    {/* <button onClick={() => deleteCalcado(calcado.produto.codigo)} className='btn btn-danger'>Excluir</button> */}
                                 </td>
                             </tr>
                         ))

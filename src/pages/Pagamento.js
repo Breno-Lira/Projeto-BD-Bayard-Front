@@ -85,6 +85,7 @@ export default function Pagamento() {
                         <th>ID Venda</th>
                         <th>Valor total</th>
                         <th>Desconto</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>

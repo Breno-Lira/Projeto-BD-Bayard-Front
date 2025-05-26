@@ -112,9 +112,9 @@ export default function DevolucaoCliente() {
                                     <td>{item.fkVendedorCPF}</td>
                                     <td>{item.dataDevolucao}</td>
                                     <td>{item.qtdProduto}</td>
-                                    <td>
+                                    {/* <td>
                                         <button className='btn btn-danger mx-2' onClick={() => deleteDevCliente(item.idDevolucao)}>Delete</button>
-                                    </td>
+                                    </td> */}
                                 </tr>
                             ))
                         ) : (

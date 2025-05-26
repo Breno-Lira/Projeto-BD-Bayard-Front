@@ -74,7 +74,7 @@ export default function Vestuarios() {
                             <th scope="col">Gênero</th>
                             <th scope="col">Tamanho</th>
                             <th scope="col">Faixa Etária</th>
-                            <th scope="col">Ações</th>
+                            <th scope="col">Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,12 +98,12 @@ export default function Vestuarios() {
                                             Editar
                                         </Link>
 
-                                        <button
+                                        {/* <button
                                             className='btn btn-danger mx-2'
                                             onClick={() => deleteVestuario(vestuario.produto.codigo)}
                                         >
                                             Delete
-                                        </button>
+                                        </button> */}
                                     </td>
                                 </tr>
                             ))
