@@ -157,7 +157,8 @@ export default function Dashboard() {
       fontSize: '1.8rem',
       marginBottom: 25,
       color: '#333',
-      alignSelf: 'flex-start',
+      textAlign: 'center',    // ALTERADO AQUI
+      alignSelf: 'center',    // ALTERADO AQUI
     },
     resumoItem: {
       backgroundColor: '#fff',
@@ -185,8 +186,6 @@ export default function Dashboard() {
     }
   }
 
-  // Funções para hover do botão, com React, normalmente usaríamos CSS ou biblioteca,
-  // mas aqui vamos usar estado simples para hover:
   const [hoverBtnMes, setHoverBtnMes] = useState(false)
   const [hoverBtnVendedor, setHoverBtnVendedor] = useState(false)
 
@@ -290,7 +289,6 @@ export default function Dashboard() {
           <>
             <h2 style={estilos.titulo}>Top 10 Produtos Mais Vendidos</h2>
             <div style={{ display: 'flex', gap: '40px', alignItems: 'flex-start', maxWidth: '900px', width: '100%' }}>
-              {/* Lista */}
               <div style={{ flex: 1 }}>
                 {topProdutosMaisVendidos.map((produto, index) => (
                   <div key={index} style={{ ...estilos.resumoItem, marginBottom: 10 }}>
@@ -299,7 +297,6 @@ export default function Dashboard() {
                 ))}
               </div>
 
-              {/* Gráfico */}
               <div style={{ flex: 1 }}>
                 <BarChart width={400} height={350} data={topProdutosMaisVendidos} margin={{ bottom: 80 }}>
                   <CartesianGrid strokeDasharray="3 3" />
