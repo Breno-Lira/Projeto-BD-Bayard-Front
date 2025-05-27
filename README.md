@@ -26,5 +26,8 @@ npm install
 ```bash
 npm start
 ```
-
+### 4. Caso os graficos não estejam aparecendo tente rodar
+```bash
+npm install --save @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/fontawesome-svg-core
+```
 
